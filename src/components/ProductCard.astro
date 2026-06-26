@@ -1,0 +1,14 @@
+---
+export interface Props { product: { name: string; description: string; image: string; }; lang: string; }
+const { product, lang } = Astro.props;
+---
+
+<div style="background:white;border:1px solid #eee;border-radius:5px;overflow:hidden;transition:all 0.3s ease;&:hover{box-shadow:0 10px 30px rgba(0,0,0,0.1);transform:translateY(-5px);}">
+  <div style="height:220px;background:#f9f9f9;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:20px;">
+    <img src={product.image} alt={product.name} style="width:100%;height:100%;object-fit:contain;" loading="lazy" />
+  </div>
+  <div style="padding:25px;text-align:{lang==='ar'?'right':'left'};">
+    <h3 style="font-size:1.2rem;font-weight:600;color:var(--primary);margin-bottom:10px;">{product.name}</h3>
+    <p style="color:#666;line-height:1.6;font-size:0.95rem;">{product.description}</p>
+  </div>
+</div>

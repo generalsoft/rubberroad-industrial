@@ -1,0 +1,84 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  lang: string;
+  dir: string;
+}
+
+const { title, lang, dir } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Global functions for hamburger menu
+      window.toggleMenu = function () {
+        const nav = document.getElementById("nav");
+        const burger = document.getElementById("burger-btn");
+        if (!nav || !burger) return;
+
+        nav.classList.toggle("active");
+        burger.classList.toggle("active");
+
+        const spans = burger.querySelectorAll("span");
+        if (burger.classList.contains("active")) {
+          spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+          spans[1].style.opacity = "0";
+          spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+        } else {
+          spans[0].style.transform = "none";
+          spans[1].style.opacity = "1";
+          spans[2].style.transform = "none";
+        }
+      };
+
+      window.closeMenu = function () {
+        const nav = document.getElementById("nav");
+        const burger = document.getElementById("burger-btn");
+        if (!nav || !burger) return;
+
+        nav.classList.remove("active");
+        burger.classList.remove("active");
+
+        const spans = burger.querySelectorAll("span");
+        spans[0].style.transform = "none";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "none";
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("yr").textContent = new Date().getFullYear();
+
+        const nav = document.getElementById("nav");
+        if (nav) {
+          window.addEventListener("scroll", () => {
+            nav.classList.toggle("scrolled", window.scrollY > 20);
+          });
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("in");
+            });
+          },
+          { threshold: 0.12 },
+        );
+        document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      });
+    </script>
+  </body>
+</html>

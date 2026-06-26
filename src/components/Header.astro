@@ -1,0 +1,23 @@
+---
+export interface Props { lang: string; dir: string; }
+const { lang } = Astro.props;
+const { translations } = await import("../i18n/translations");
+const t = translations[lang].nav;
+const currentPath = Astro.url.pathname;
+---
+
+<header style="background:var(--primary);color:white;padding:15px 0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;">
+    <a href="/{lang}/" style="font-size:1.5rem;font-weight:800;color:var(--gold);letter-spacing:2px;">
+      <i class="fas fa-road" style="margin-right:8px;"></i> Rubber Road Industrial
+    </a>
+    <nav style="display:flex;align-items:center;gap:25px;flex-wrap:wrap;">
+      {Object.entries(t).map(([key, value]) => {
+        const href = key === 'home' ? `/${lang}/` : `/${lang}/${key}/`;
+        const isActive = currentPath === href;
+        return <a href={href} style={`color:${isActive?'var(--gold)':'rgba(255,255,255,0.8)'};font-size:0.95rem;font-weight:500;transition:all 0.3s ease;position:relative;border-bottom:${isActive?'2px solid var(--gold)':'2px solid transparent'};padding-bottom:3px;&:hover{color:var(--gold);border-bottom-color:var(--gold)}`}>{value}</a>;
+      })}
+      <a href={`/${lang === 'en' ? 'ar' : 'en'}/`} style="background:transparent;border:1px solid var(--gold);color:var(--gold);padding:5px 15px;font-weight:600;font-size:0.9rem;transition:all 0.3s ease;">{lang === 'en' ? 'العربية' : 'English'}</a>
+    </nav>
+  </div>
+</header>

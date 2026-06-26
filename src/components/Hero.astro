@@ -1,0 +1,14 @@
+---
+export interface Props { lang: string; dir: string; }
+const { lang } = Astro.props;
+const { translations } = await import("../i18n/translations");
+const hero = translations[lang].hero;
+---
+
+<section style="background:linear-gradient(135deg,var(--primary),var(--secondary),var(--accent));min-height:85vh;display:flex;align-items:center;position:relative;overflow:hidden;">
+  <div class="container" style="position:relative;z-index:2;text-align:{lang==='ar'?'right':'left'};padding:100px 20px;">
+    <h1 style="font-size:3.5rem;font-weight:800;color:white;margin-bottom:20px;line-height:1.2;max-width:700px;">{hero.title}</h1>
+    <p style="font-size:1.2rem;color:rgba(255,255,255,0.8);margin-bottom:40px;max-width:500px;line-height:1.8;">{hero.subtitle}</p>
+    <a href={`/${lang}/products/`} class="btn btn-primary">{hero.cta}</a>
+  </div>
+</section>
