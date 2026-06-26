@@ -404,6 +404,17 @@ const base = import.meta.env.BASE_URL;
     >
       <span>© <span id="yr"></span> {t.footer.left}</span>
       <span>{t.footer.right}</span>
+      <span style="font-size:0.65rem;opacity:0.6;">
+        {isAr ? 'طور بواسطة' : 'Developed by'}{' '}
+        <a
+          href={isAr ? 'https://generalsoft.ae/ar/' : 'https://generalsoft.ae/en/'}
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color:var(--green);text-decoration:none;"
+          onmouseover="this.style.textDecoration='underline'"
+          onmouseout="this.style.textDecoration='none'"
+        >Generalsoft</a>
+      </span>
     </div>
   </footer>
 </Layout>
