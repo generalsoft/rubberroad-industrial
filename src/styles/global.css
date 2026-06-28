@@ -14,7 +14,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-  background:var(--black);
+  background-image: url("/images/logo/bg.png");
   color:var(--paper);
   font-family:'Space Grotesk',sans-serif;
   overflow-x:hidden;
