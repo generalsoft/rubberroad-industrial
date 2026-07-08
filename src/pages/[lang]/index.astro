@@ -365,7 +365,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
     </svg>
   </a>
 
-  <!-- Vertical QR Code Strip -->
+  <!-- Vertical QR Code Strip with hover preview -->
   <div style={`
     position:fixed;
     ${isAr ? 'left' : 'right'}:24px;
@@ -381,20 +381,23 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
     border-radius:8px;
     padding:12px 8px;
   `}>
-    <a href={base + "/images/qr/website.png"} target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;">
+    <div class="qr-item" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;cursor:pointer;position:relative;">
       <img src={base + "/images/qr/website.png"} alt="Website QR" style="width:48px;height:48px;border-radius:3px;" />
       <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--green);text-transform:uppercase;letter-spacing:.04em;">{isAr ? 'الموقع' : 'Website'}</span>
-    </a>
+      <img src={base + "/images/qr/website.png"} alt="Website QR Large" class="qr-preview" />
+    </div>
     <div style="width:100%;height:1px;background:var(--line);"></div>
-    <a href={base + "/images/qr/Contact.png"} target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;">
+    <div class="qr-item" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;cursor:pointer;position:relative;">
       <img src={base + "/images/qr/Contact.png"} alt="Contact QR" style="width:48px;height:48px;border-radius:3px;" />
       <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--green);text-transform:uppercase;letter-spacing:.04em;">{isAr ? 'اتصال' : 'Contact'}</span>
-    </a>
+      <img src={base + "/images/qr/Contact.png"} alt="Contact QR Large" class="qr-preview" />
+    </div>
     <div style="width:100%;height:1px;background:var(--line);"></div>
-    <a href={base + "/images/qr/Location.png"} target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;">
+    <div class="qr-item" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;cursor:pointer;position:relative;">
       <img src={base + "/images/qr/Location.png"} alt="Location QR" style="width:48px;height:48px;border-radius:3px;" />
       <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--green);text-transform:uppercase;letter-spacing:.04em;">{isAr ? 'الموقع' : 'Location'}</span>
-    </a>
+      <img src={base + "/images/qr/Location.png"} alt="Location QR Large" class="qr-preview" />
+    </div>
   </div>
 
   <footer>

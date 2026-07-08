@@ -466,3 +466,31 @@ footer{
     transform: rotateX(0deg) rotateY(0deg);
   }
 }
+
+/* QR hover preview */
+.qr-item .qr-preview {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 8px;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 1001;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.qr-item:hover .qr-preview {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+[dir="rtl"] .qr-item .qr-preview {
+  right: auto;
+  left: 70px;
+}
