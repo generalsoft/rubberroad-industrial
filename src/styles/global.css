@@ -235,6 +235,12 @@ section{position:relative;z-index:1;padding:120px 0;}
   margin-bottom:20px;
   font-size:1rem;
 }
+.story-text{
+  background:rgba(21,23,21,0.7);
+  padding:32px;
+  border-radius:8px;
+  border:1px solid var(--line);
+}
 .quote{
   margin-top:32px;
   padding:28px 30px;
@@ -253,7 +259,13 @@ section{position:relative;z-index:1;padding:120px 0;}
   font-size:0.72rem;color:var(--green);
   text-transform:uppercase;letter-spacing:.1em;font-style:normal;
 }
-.timeline{position:relative;padding-left:40px;}
+.timeline{
+  position:relative;
+  padding:32px 32px 32px 56px;
+  background:rgba(21,23,21,0.7);
+  border-radius:8px;
+  border:1px solid var(--line);
+}
 .timeline::before{
   content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;
   background:linear-gradient(var(--green), var(--line));
@@ -321,9 +333,13 @@ section{position:relative;z-index:1;padding:120px 0;}
   position:relative;
   min-height:200px;
   display:flex;flex-direction:column;justify-content:space-between;
+  background:rgba(21,23,21,0.85);
 }
 .ind-grid .ind-card:nth-child(3n){border-right:none;}
-.ind-card:hover{background:rgba(126,211,33,0.04);}
+.ind-card:hover{background:var(--panel);transform:translateY(-4px);border-color:var(--green);}
+.ind-card:hover h4{color:var(--green);font-size:1.6rem;}
+.ind-card:hover p,
+.ind-card:hover .num{color:var(--green);}
 .ind-card .num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--paper-dim);}
 .ind-card h4{font-family:'Big Shoulders Display';font-size:1.5rem;font-weight:700;margin:18px 0 10px;}
 .ind-card p{font-size:0.85rem;color:var(--paper-dim);line-height:1.55;}
@@ -341,7 +357,10 @@ section{position:relative;z-index:1;padding:120px 0;}
   text-decoration:none;
   color:inherit;
 }
-.prod-card:hover{background:var(--panel);transform:translateY(-4px);}
+.prod-card:hover{background:var(--panel);transform:translateY(-4px);border-color:var(--green);}
+.prod-card:hover h4{color:var(--green);font-size:1.3rem;}
+.prod-card:hover p{color:var(--green);}
+.prod-card:hover .tag{color:var(--green-dim);}
 .prod-icon{width:42px;height:42px;position:relative;margin-bottom:18px;}
 .prod-card h4{font-family:'Big Shoulders Display';font-weight:700;font-size:1.2rem;text-transform:uppercase;line-height:1.05;}
 .prod-card .tag{
@@ -366,7 +385,12 @@ section{position:relative;z-index:1;padding:120px 0;}
 .cert-card{
   border:1px solid var(--line);padding:30px;
   display:flex;align-items:center;gap:18px;
+  background:rgba(21,23,21,0.85);
 }
+.cert-card:hover{border-color:var(--green);background:rgba(126,211,33,0.06);}
+.cert-card:hover .ct,
+.cert-card:hover .ct b{color:var(--green);}
+.cert-card:hover .iso{font-size:2.4rem;}
 .cert-card .iso{
   font-family:'Big Shoulders Display';font-weight:900;font-size:2.2rem;color:var(--green);
   line-height:1;
@@ -444,6 +468,12 @@ section{position:relative;z-index:1;padding:120px 0;}
 .contact-grid{
   display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;
 }
+.contact-grid > div:first-child{
+  background:rgba(21,23,21,0.7);
+  padding:32px;
+  border-radius:8px;
+  border:1px solid var(--line);
+}
 .contact h2{font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:24px;}
 .contact-grid p{color:var(--paper-dim);max-width:460px;line-height:1.7;margin-bottom:36px;}
 .contact-list{display:flex;flex-direction:column;gap:22px;}
@@ -458,7 +488,7 @@ section{position:relative;z-index:1;padding:120px 0;}
 .panel-box{
   border:1px solid var(--line);
   padding:44px;
-  background:var(--panel);
+  background:rgba(21,23,21,0.7);
 }
 .panel-box h3{font-size:1.6rem;margin-bottom:18px;}
 .panel-box p{color:var(--paper-dim);font-size:0.9rem;margin-bottom:28px;line-height:1.6;}
