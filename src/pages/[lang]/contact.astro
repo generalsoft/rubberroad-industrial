@@ -17,7 +17,13 @@ const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 ---
 
-<Layout title={`${t.contact.eyebrow} — Rubber Road Industrial`} lang={lang} dir={dir}>
+<Layout
+  title={`${t.contact.eyebrow} — Rubber Road Industrial`}
+  lang={lang}
+  dir={dir}
+  description="Contact Rubber Road Industrial in Ras Al Khaimah, UAE. Request a quote for custom rubber moulding, compounds, or standard components. Call +971 52 809 9319 or email sales@rubberroad-industrial.com."
+  canonical={`https://v2.rubberroad-industrial.com/${lang}/contact/`}
+>
   <div class="circuit-bg"></div>
   <Nav lang={lang} dir={dir} />
 

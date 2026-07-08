@@ -17,7 +17,13 @@ const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 ---
 
-<Layout title={`${t.nav.material} — Rubber Road Industrial`} lang={lang} dir={dir}>
+<Layout
+  title={`${t.nav.material} — Rubber Road Industrial`}
+  lang={lang}
+  dir={dir}
+  description="Rubber is in everything — it absorbs, flexes, protects, and returns. Explore over eight distinct rubber compound types and our in-house QC process at Rubber Road Industrial."
+  canonical={`https://v2.rubberroad-industrial.com/${lang}/material/`}
+>
   <div class="circuit-bg"></div>
   <Nav lang={lang} dir={dir} />
 

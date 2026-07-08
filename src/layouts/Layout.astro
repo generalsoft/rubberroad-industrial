@@ -5,9 +5,19 @@ export interface Props {
   title: string;
   lang: string;
   dir: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
 }
 
 const { title, lang, dir } = Astro.props;
+const description = Astro.props.description || "Rubber Road Industrial engineers high-performance rubber components for aviation, marine, rail, oil & gas, and industrial sectors across the Gulf and MENA — built on over seventy years of manufacturing heritage.";
+const ogImage = Astro.props.ogImage || "/images/logo/Logo3D.png";
+const canonical = Astro.props.canonical || `https://v2.rubberroad-industrial.com/${lang}/`;
+const siteName = "Rubber Road Industrial";
+const isAr = lang === "ar";
+const ogLocale = isAr ? "ar_AE" : "en_US";
+const twitterHandle = "@rubberroadind";
 ---
 
 <!doctype html>
@@ -15,11 +25,101 @@ const { title, lang, dir } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="rubber, rubber products, rubber components, rubber manufacturer UAE, rubber supplier Ras Al Khaimah, industrial rubber, rubber fenders, rubber seals, rubber gaskets, rubber mounts, rubber tyres, rubber moulding, rubber compounds, ISO 9001, ISO 45001, ISO 14001, rubber road industrial, bahou rubber, rubber parts, custom rubber moulding, rubber solutions, rubber manufacturer Gulf, rubber supplier MENA" />
+    <meta name="author" content="Rubber Road Industrial LLC" />
+    <meta name="robots" content="index, follow" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="language" content={isAr ? "Arabic" : "English"} />
+    <meta name="geo.region" content="AE-RK" />
+    <meta name="geo.placename" content="Ras Al Khaimah" />
+    <meta name="geo.position" content="25.7895;55.9432" />
+    <meta name="ICBM" content="25.7895, 55.9432" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href={`https://v2.rubberroad-industrial.com/en/`} />
+    <link rel="alternate" hreflang="ar" href={`https://v2.rubberroad-industrial.com/ar/`} />
+    <link rel="alternate" hreflang="x-default" href="https://v2.rubberroad-industrial.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`https://v2.rubberroad-industrial.com${ogImage}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Rubber Road Industrial — Engineered Rubber Solutions" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={ogLocale} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://v2.rubberroad-industrial.com${ogImage}`} />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Rubber Road Industrial LLC",
+      "url": "https://v2.rubberroad-industrial.com",
+      "logo": "https://v2.rubberroad-industrial.com/images/logo/Logo3D.png",
+      "description": description,
+      "foundingDate": "2021",
+      "foundingLocation": "Ras Al Khaimah, UAE",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ras Al Khaimah",
+        "addressRegion": "RAK",
+        "addressCountry": "AE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971-52-809-9319",
+        "contactType": "sales",
+        "email": "sales@rubberroad-industrial.com",
+        "availableLanguage": ["English", "Arabic"]
+      },
+      "sameAs": [
+        "https://www.rubberroad-industrial.com"
+      ],
+      "knowsAbout": [
+        "Rubber manufacturing",
+        "Rubber compounds",
+        "Industrial rubber components",
+        "Rubber fenders",
+        "Rubber seals and gaskets",
+        "Rubber mounts and vibration dampers",
+        "Rubber solid tyres",
+        "Custom rubber moulding"
+      ],
+      "hasCertification": [
+        { "@type": "Certification", "name": "ISO 9001:2015", "description": "Quality Management" },
+        { "@type": "Certification", "name": "ISO 45001:2018", "description": "Occupational Health & Safety" },
+        { "@type": "Certification", "name": "ISO 14001:2015", "description": "Environmental Management" }
+      ]
+    })} />
   </head>
   <body>
     <slot />

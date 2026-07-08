@@ -18,7 +18,13 @@ const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 ---
 
-<Layout title={`${t.products.title.replace('\n', ' ')} — Rubber Road Industrial`} lang={lang} dir={dir}>
+<Layout
+  title={`${t.products.title.replace('\n', ' ')} — Rubber Road Industrial`}
+  lang={lang}
+  dir={dir}
+  description="Browse Rubber Road Industrial's full product range: rubber solid tyres, fenders, mounts, seals, gaskets, speed humps, mats, tiles, and custom moulded components. ISO-certified manufacturing in Ras Al Khaimah, UAE."
+  canonical={`https://v2.rubberroad-industrial.com/${lang}/products/`}
+>
   <div class="circuit-bg"></div>
   <Nav lang={lang} dir={dir} />
 

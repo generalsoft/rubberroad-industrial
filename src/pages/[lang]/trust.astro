@@ -17,7 +17,13 @@ const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 ---
 
-<Layout title={`${t.nav.trust} — Rubber Road Industrial`} lang={lang} dir={dir}>
+<Layout
+  title={`${t.nav.trust} — Rubber Road Industrial`}
+  lang={lang}
+  dir={dir}
+  description="Rubber Road Industrial is ISO 9001:2015, ISO 45001:2018, and ISO 14001:2015 certified. Trusted by ADNOC, Air Arabia, Dubai World, NMDC Group, and other industry leaders across the UAE and MENA."
+  canonical={`https://v2.rubberroad-industrial.com/${lang}/trust/`}
+>
   <div class="circuit-bg"></div>
   <Nav lang={lang} dir={dir} />
 

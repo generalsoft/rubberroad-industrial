@@ -17,7 +17,13 @@ const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 ---
 
-<Layout title={`${t.nav.story} — Rubber Road Industrial`} lang={lang} dir={dir}>
+<Layout
+  title={`${t.nav.story} — Rubber Road Industrial`}
+  lang={lang}
+  dir={dir}
+  description="Discover the Bahou family's rubber manufacturing legacy — from Fawzi Bahou's first factory in Amman (1952) to Rubber Road Industrial in Ras Al Khaimah, UAE. Over seventy years of engineered rubber heritage."
+  canonical={`https://v2.rubberroad-industrial.com/${lang}/story/`}
+>
   <div class="circuit-bg"></div>
   <Nav lang={lang} dir={dir} />
 
