@@ -163,7 +163,7 @@ nav ul a:hover{color:var(--green);}
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
   background:var(--charcoal);
-  overflow:hidden;
+  overflow:visible;
   white-space:nowrap;
   padding:14px 0;
   position:relative;z-index:1;
@@ -178,6 +178,41 @@ nav ul a:hover{color:var(--green);}
   animation:scroll-left 38s linear infinite;
 }
 .marquee-strip span b{color:var(--green);padding:0 8px;}
+.marquee-strip .compound-tip {
+  position: relative;
+  cursor: help;
+  transition: color .2s;
+}
+.marquee-strip .compound-tip:hover {
+  color: var(--green);
+}
+.marquee-strip .compound-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: bottom center;
+  background: var(--panel);
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  color: var(--paper);
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 10000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+.marquee-strip .compound-tip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleY(1);
+}
 @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 section{position:relative;z-index:1;padding:120px 0;}
 .section-head{
