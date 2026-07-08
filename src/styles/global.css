@@ -122,10 +122,11 @@ nav ul a:hover{color:var(--green);}
 }
 .hero-sub{
   font-size:1.05rem;
-  color:var(--paper-dim);
+  color:var(--paper);
   max-width:480px;
   margin-top:28px;
   line-height:1.6;
+  opacity:0.85;
 }
 .hero-meta b{color:var(--green);display:block;font-size:1.6rem;font-family:'Big Shoulders Display';font-weight:800;}
 .hero-cta{
@@ -220,7 +221,7 @@ section{position:relative;z-index:1;padding:120px 0;}
   margin-bottom:64px;gap:40px;flex-wrap:wrap;
 }
 .section-head h2{font-size:clamp(2.2rem,4.5vw,3.6rem);}
-.section-head p{color:var(--paper-dim);max-width:380px;line-height:1.6;font-size:0.95rem;}
+.section-head p{color:var(--paper);max-width:380px;line-height:1.6;font-size:0.95rem;opacity:0.85;}
 .story{background:var(--charcoal);}
 .story-grid{
   display:grid;grid-template-columns:0.9fr 1.1fr;gap:80px;
