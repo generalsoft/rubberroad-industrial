@@ -73,6 +73,7 @@ export const translations = {
       ]
     },
     products: {
+      eyebrow: "Products",
       title: "Rubber\nIn Motion",
       subtitle: "Every compound engineered. Every component tested. Every application covered — standard or custom-moulded to your exact drawing.",
       items: [
@@ -212,6 +213,7 @@ export const translations = {
       ]
     },
     products: {
+      eyebrow: "المنتجات",
       title: "المطاط\nفي الحركة",
       subtitle: "كل مركب مصمم. كل مكون مختبر. كل تطبيق مغطى - قياسي أو مقولب حسب الرسم الخاص بك.",
       items: [

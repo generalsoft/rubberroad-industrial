@@ -148,8 +148,8 @@ nav ul a:hover{color:var(--green);}
 }
 .btn-solid{background:var(--green);color:var(--black);}
 .btn-solid:hover{background:transparent;color:var(--green);}
-.btn-ghost{color:var(--paper);border-color:var(--line);}
-.btn-ghost:hover{border-color:var(--green);color:var(--green);}
+.btn-ghost{color:var(--paper);border-color:var(--line);background:transparent;}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);background:transparent;}
 .scroll-cue{
   position:absolute;bottom:36px;left:40px;
   font-family:'JetBrains Mono',monospace;

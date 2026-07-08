@@ -1,0 +1,153 @@
+---
+export interface Props {
+  videoSrc: string;
+  buttonLabel: string;
+  lang: string;
+}
+
+const { videoSrc, buttonLabel, lang } = Astro.props;
+const isAr = lang === "ar";
+const uid = "vm-" + Math.random().toString(36).slice(2, 9);
+---
+
+<button class="btn btn-ghost video-trigger" data-video-src={videoSrc} data-uid={uid}>
+  {buttonLabel}
+</button>
+
+<div class="video-overlay" data-uid={uid} style="display:none;">
+  <div class="video-overlay-bg"></div>
+  <div class="video-overlay-content">
+    <button class="video-close-btn">
+      {isAr ? '✕ إغلاق' : '✕ Close'}
+    </button>
+    <video controls preload="metadata" class="video-modal-player">
+      {isAr ? 'متصفحك لا يدعم تشغيل الفيديو.' : 'Your browser does not support the video tag.'}
+    </video>
+  </div>
+</div>
+
+<style>
+  .video-trigger {
+    cursor: pointer;
+  }
+  .video-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .video-overlay-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+  }
+  .video-overlay-content {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    z-index: 1;
+  }
+  .video-close-btn {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: color .2s;
+    z-index: 2;
+  }
+  .video-close-btn:hover {
+    color: var(--green);
+  }
+  .video-modal-player {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    display: block;
+    max-height: 80vh;
+  }
+  [dir="rtl"] .video-close-btn {
+    right: auto;
+    left: 0;
+  }
+</style>
+
+<script>
+  document.addEventListener('click', function(e) {
+    // Find trigger button
+    const trigger = e.target.closest('.video-trigger');
+    if (trigger) {
+      const uid = trigger.getAttribute('data-uid');
+      const src = trigger.getAttribute('data-video-src');
+      const overlay = document.querySelector('.video-overlay[data-uid="' + uid + '"]');
+      if (overlay && src) {
+        const video = overlay.querySelector('video');
+        if (video) {
+          video.src = src;
+          overlay.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+          video.currentTime = 0;
+          video.play().catch(function(){});
+        }
+      }
+      return;
+    }
+
+    // Find close button
+    const closeBtn = e.target.closest('.video-close-btn');
+    if (closeBtn) {
+      const overlay = closeBtn.closest('.video-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        const video = overlay.querySelector('video');
+        if (video) {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        }
+      }
+      return;
+    }
+
+    // Click on background
+    const bg = e.target.closest('.video-overlay-bg');
+    if (bg) {
+      const overlay = bg.closest('.video-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        const video = overlay.querySelector('video');
+        if (video) {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        }
+      }
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const overlay = document.querySelector('.video-overlay[style*="flex"]');
+      if (overlay) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        const video = overlay.querySelector('video');
+        if (video) {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        }
+      }
+    }
+  });
+</script>
