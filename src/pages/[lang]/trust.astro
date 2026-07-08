@@ -1,0 +1,68 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout title={`${t.nav.trust} — Rubber Road Industrial`} lang={lang} dir={dir}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section class="certs" style="padding-top:140px;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>{t.certs.title}</h2>
+        <p>{t.certs.subtitle}</p>
+      </div>
+      <div class="cert-grid reveal">
+        {
+          t.certs.certifications.map((cert) => (
+            <div class="cert-card">
+              <div class="iso">{cert.number}</div>
+              <div class="ct">
+                <b>{cert.name}</b>
+                {cert.standard}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="eyebrow reveal" style="margin-bottom:24px;">
+        {t.certs.clientsTitle}
+      </div>
+      <div class="clients-row reveal" id="clients-row">
+        {t.certs.clients.map((client) => {
+          const name = typeof client === 'string' ? client : client.name;
+          const info = typeof client === 'string' ? '' : client.info;
+          const ticker = typeof client === 'string' ? '' : client.ticker;
+          return (
+            <div class="client" data-info={info} data-ticker={ticker}>
+              {name}
+              <div class="client-ticker">
+                <span class="ticker-label">{ticker ? `${ticker}` : ''}</span>
+                <span class="ticker-content">{info}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>

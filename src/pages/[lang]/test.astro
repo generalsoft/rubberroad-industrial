@@ -1,0 +1,10 @@
+---
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "en" } },
+    { params: { lang: "ar" } },
+  ];
+}
+---
+
+<h1>Test page</h1>

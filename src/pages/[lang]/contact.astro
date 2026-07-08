@@ -1,0 +1,68 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout title={`${t.contact.eyebrow} — Rubber Road Industrial`} lang={lang} dir={dir}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section class="contact" style="padding-top:140px;">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="eyebrow">{t.contact.eyebrow}</div>
+          <h2>{t.contact.title}</h2>
+          <p>{t.contact.subtitle}</p>
+          <div class="contact-list">
+            {
+              t.contact.details.map((detail) => (
+                <div class="row">
+                  <span>{detail.label}</span>
+                  {detail.href ? (
+                    <a href={detail.href}>{detail.value}</a>
+                  ) : (
+                    <span>{detail.value}</span>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="panel-box reveal">
+          <h3>{t.contact.panelTitle}</h3>
+          <p>{t.contact.panelText}</p>
+          <a
+            href={t.contact.emailLink}
+            class="btn btn-solid"
+            style="width:100%;justify-content:center;">{t.contact.emailBtn}</a
+          >
+          <a
+            href={t.contact.callLink}
+            class="btn btn-ghost"
+            style="width:100%;justify-content:center;margin-top:14px;"
+            >{t.contact.callBtn}</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>

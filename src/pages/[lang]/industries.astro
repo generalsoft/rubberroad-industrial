@@ -1,0 +1,47 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout title={`${t.nav.industries} — Rubber Road Industrial`} lang={lang} dir={dir}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section class="industries" style="padding-top:140px;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>{t.industries.title}</h2>
+        <p>{t.industries.subtitle}</p>
+      </div>
+      <div class="ind-grid reveal">
+        {
+          t.industries.items.map((item, index) => (
+            <div class="ind-card">
+              <span class="num">{String(index + 1).padStart(2, "0")}</span>
+              <h4>{item.name}</h4>
+              <p>{item.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>

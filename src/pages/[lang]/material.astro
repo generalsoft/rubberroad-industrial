@@ -1,0 +1,72 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout title={`${t.nav.material} — Rubber Road Industrial`} lang={lang} dir={dir}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section id="material" style="padding-top:140px;">
+    <div class="wrap">
+      <div class="material-intro reveal">
+        <div>
+          <div class="eyebrow">{t.material.eyebrow}</div>
+          <h2 style="font-size:clamp(2rem,4vw,3.2rem);margin-top:14px;">
+            {t.material.title}
+          </h2>
+        </div>
+        <div>
+          <p>{t.material.p1}</p>
+          <p>{t.material.p2}</p>
+        </div>
+      </div>
+      <div class="props reveal">
+        {
+          t.material.props.map((prop) => (
+            <div class="prop">
+              <div class="ic">{prop.name}</div>
+              <div class="lb">{prop.desc}</div>
+            </div>
+          ))
+        }
+      </div>
+      <div style="margin-top:110px;" class="reveal">
+        <div class="section-head" style="margin-bottom:30px;">
+          <h2 style="font-size:clamp(2rem,4vw,3.2rem);">
+            {t.material.processTitle}
+          </h2>
+          <p>{t.material.processSub}</p>
+        </div>
+        <div class="process-belt">
+          {
+            t.material.process.map((stage, index) => (
+              <div class="p-stage" data-n={String(index + 1).padStart(2, "0")}>
+                <h4>{stage.name}</h4>
+                <p>{stage.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>

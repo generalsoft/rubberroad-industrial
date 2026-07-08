@@ -1,0 +1,58 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout title={`${t.nav.story} — Rubber Road Industrial`} lang={lang} dir={dir}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section class="story" style="padding-top:140px;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>{t.story.title}</h2>
+        <p>{t.story.subtitle}</p>
+      </div>
+      <div class="story-grid">
+        <div class="story-text reveal">
+          <p>{t.story.p1}</p>
+          <p>{t.story.p2}</p>
+          <p>{t.story.p3}</p>
+          <div class="quote">
+            {t.story.quote}
+            <cite>{t.story.quoteCite}</cite>
+          </div>
+        </div>
+        <div class="timeline reveal">
+          {
+            t.story.timeline.map((item) => (
+              <div class="t-item">
+                <div class="yr">{item.year}</div>
+                <div class="ttl">{item.title}</div>
+                <div class="dsc">{item.desc}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>

@@ -1,0 +1,54 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout title={`${t.nav.products} — Rubber Road Industrial`} lang={lang} dir={dir}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section id="products" style="padding-top:140px;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>{t.products.title}</h2>
+        <p>{t.products.subtitle}</p>
+      </div>
+      <div class="prod-grid reveal">
+        {
+          t.products.items.map((product, index) => (
+            <div class="prod-card">
+              {product.iconImage ? (
+                <div class="prod-icon" style="overflow:hidden;border-radius:4px;">
+                  <img src={base + product.iconImage} alt={product.name} style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+              ) : (
+                <div class={`prod-icon ${product.iconClass}`} />
+              )}
+              <h4>{product.name}</h4>
+              <div class="tag">{product.tag}</div>
+              <p>{product.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>

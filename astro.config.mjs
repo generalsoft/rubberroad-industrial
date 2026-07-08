@@ -1,13 +1,6 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: 'https://v2.rubberroad-industrial.com',
-  trailingSlash: 'always',
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'ar'],
-    routing: {
-      prefixDefaultLocale: true,
-    },
-  },
+  site: "https://v2.rubberroad-industrial.com",
+  trailingSlash: "always",
 });
