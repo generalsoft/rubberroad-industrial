@@ -253,7 +253,13 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
         {
           t.products.items.map((product, index) => (
             <div class="prod-card">
-              <div class={`prod-icon ${product.iconClass}`} />
+              {product.iconImage ? (
+                <div class="prod-icon" style="overflow:hidden;border-radius:4px;">
+                  <img src={base + product.iconImage} alt={product.name} style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+              ) : (
+                <div class={`prod-icon ${product.iconClass}`} />
+              )}
               <h4>{product.name}</h4>
               <div class="tag">{product.tag}</div>
               <p>{product.desc}</p>
@@ -287,8 +293,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
       <div class="eyebrow reveal" style="margin-bottom:24px;">
         {t.certs.clientsTitle}
       </div>
-      <div class="clients-row reveal">
-        {t.certs.clients.map((client) => <div class="client">{client}</div>)}
+      <div class="clients-row reveal" id="clients-row">
+        {t.certs.clients.map((client) => {
+          const name = typeof client === 'string' ? client : client.name;
+          const info = typeof client === 'string' ? '' : client.info;
+          const ticker = typeof client === 'string' ? '' : client.ticker;
+          return (
+            <div class="client" data-info={info} data-ticker={ticker}>
+              {name}
+              <div class="client-ticker">
+                <span class="ticker-label">{ticker ? `${ticker}` : ''}</span>
+                <span class="ticker-content">{info}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>

@@ -76,18 +76,18 @@ export const translations = {
       title: "Rubber\nIn Motion",
       subtitle: "Every compound engineered. Every component tested. Every application covered — standard or custom-moulded to your exact drawing.",
       items: [
-        { name: "General Rubber Compound", tag: "Foundation", desc: "The base material behind everything we manufacture.", iconClass: "icon-ring" },
-        { name: "Rubber Solid Tyres", tag: "Heavy-Duty", desc: "No punctures. No downtime. Engineered for industrial use.", iconClass: "icon-ring" },
-        { name: "Rubber Fenders", tag: "Marine", desc: "The quiet protector of ports, vessels, and marine infrastructure.", iconClass: "icon-wave" },
-        { name: "Rollers & Printing Rollers", tag: "Production", desc: "Precision that keeps production lines moving.", iconClass: "icon-ring" },
-        { name: "Rubber Mounts", tag: "Vibration Isolation", desc: "Silence the vibration. Extend the life of your equipment.", iconClass: "icon-block" },
-        { name: "Shock Absorbers & Bushes", tag: "Impact Protection", desc: "Cushion the impact. Protect the investment.", iconClass: "icon-tri" },
-        { name: "Rubber Couplings", tag: "Connection", desc: "Flexible connection points that never fail.", iconClass: "icon-coup" },
-        { name: "Rubber Chocks", tag: "Last Line of Defence", desc: "Reliable wheel immobilization, holding firm under maximum load.", iconClass: "icon-bolt" },
-        { name: "Rubber Speed Humps", tag: "Road Safety", desc: "Safety infrastructure built for UAE traffic.", iconClass: "icon-block" },
-        { name: "Rubber Mats", tag: "Flooring", desc: "Engineered for comfort. Built for performance.", iconClass: "icon-mat" },
-        { name: "Rubber Tiles", tag: "Flooring", desc: "Absorb the impact. Protect every step.", iconClass: "icon-tile" },
-        { name: "Corner & Wall Guards", tag: "Surface Protection", desc: "Protect the edges. Preserve the space.", iconClass: "icon-block" }
+        { name: "General Rubber Compound", tag: "Foundation", desc: "The base material behind everything we manufacture.", iconClass: "icon-ring", iconImage: "/images/rubber/compund-2.png" },
+        { name: "Rubber Solid Tyres", tag: "Heavy-Duty", desc: "No punctures. No downtime. Engineered for industrial use.", iconClass: "icon-ring", iconImage: "/images/products/forklift-solid-tyre.jpeg" },
+        { name: "Rubber Fenders", tag: "Marine", desc: "The quiet protector of ports, vessels, and marine infrastructure.", iconClass: "icon-wave", iconImage: "/images/products/rubber-fender-curved.jpeg" },
+        { name: "Rollers & Printing Rollers", tag: "Production", desc: "Precision that keeps production lines moving.", iconClass: "icon-ring", iconImage: "/images/products/industrial-rubber-rollers-rack.jpeg" },
+        { name: "Rubber Mounts", tag: "Vibration Isolation", desc: "Silence the vibration. Extend the life of your equipment.", iconClass: "icon-block", iconImage: "/images/products/rubber-mount-bushing.jpeg" },
+        { name: "Shock Absorbers & Bushes", tag: "Impact Protection", desc: "Cushion the impact. Protect the investment.", iconClass: "icon-tri", iconImage: "/images/products/rubber-on-screws.jpeg" },
+        { name: "Rubber Couplings", tag: "Connection", desc: "Flexible connection points that never fail.", iconClass: "icon-coup", iconImage: "/images/products/rubber-o-ring-rubber-sealing-rings-for-joint-seals-.jpg" },
+        { name: "Rubber Chocks", tag: "Last Line of Defence", desc: "Reliable wheel immobilization, holding firm under maximum load.", iconClass: "icon-bolt", iconImage: "/images/products/rubber-chock.png" },
+        { name: "Rubber Speed Humps", tag: "Road Safety", desc: "Safety infrastructure built for UAE traffic.", iconClass: "icon-block", iconImage: "/images/products/black-and-yellow-speed-bumps.jpeg" },
+        { name: "Rubber Mats", tag: "Flooring", desc: "Engineered for comfort. Built for performance.", iconClass: "icon-mat", iconImage: "/images/products/matts.jpeg" },
+        { name: "Rubber Tiles", tag: "Flooring", desc: "Absorb the impact. Protect every step.", iconClass: "icon-tile", iconImage: "/images/products/interlocking-rubber-floor-tiles.jpeg" },
+        { name: "Corner & Wall Guards", tag: "Surface Protection", desc: "Protect the edges. Preserve the space.", iconClass: "icon-block", iconImage: "/images/products/wall-guard.png" }
       ]
     },
     certs: {
@@ -100,10 +100,20 @@ export const translations = {
       ],
       clientsTitle: "Some of our valuable clients",
       clients: [
-        "Dubai World", "SR Stevin Rock", "NMDC Group", "SAS Sharjah Aviation",
-        "Air Conditioning Equipment Co.", "Air Arabia", "RAK Ceramics", "Kludi RAK",
-        "ADNOC", "Deewan", "Ashok Leyland", "Royal Jordanian"
+        { name: "Dubai World", ticker: "", info: "Dubai World is a holding company managing a diversified portfolio of logistics, maritime, and port operations across the globe. Through DP World, it handles millions of rubber-tyred gantry crane operations and container movements requiring rubber fenders, seals, and industrial rollers." },
+        { name: "SR Stevin Rock", ticker: "", info: "Stevin Rock operates one of the largest quarries in the world in Ras Al Khaimah. Their heavy machinery fleet relies on rubber solid tyres, conveyor belts, and vibration mounts for continuous aggregate processing." },
+        { name: "NMDC Group", ticker: "", info: "NMDC Group is a leading marine and oil & gas services company in the UAE. Their fleet of vessels and offshore platforms depend on rubber fenders, seals, gaskets, and anti-vibration mounts for safe operations." },
+        { name: "SAS Sharjah Aviation", ticker: "", info: "SAS Sharjah Aviation provides ground handling and cargo services at Sharjah Airport. Their ground support equipment uses rubber components including landing gear buffers, seals, and industrial rollers." },
+        { name: "Air Conditioning Equipment Co.", ticker: "", info: "A leading HVAC manufacturer in the UAE. Their cooling systems incorporate rubber vibration isolators, gaskets, and custom-moulded seals for noise and vibration dampening." },
+        { name: "Air Arabia", ticker: "AIRARABIA", info: "Air Arabia is the Middle East's first and largest low-cost carrier. Their fleet maintenance program includes rubber seals, gaskets, and vibration dampers for aircraft systems." },
+        { name: "RAK Ceramics", ticker: "", info: "One of the largest ceramics manufacturers in the world, headquartered in Ras Al Khaimah. Their production lines use industrial rubber rollers, conveyor components, and custom moulded parts." },
+        { name: "Kludi RAK", ticker: "", info: "A joint venture between Kludi Germany and RAK Ceramics, manufacturing premium bathroom fittings. Their production equipment relies on rubber seals, gaskets, and precision moulded components." },
+        { name: "ADNOC", ticker: "ADNOC", info: "Abu Dhabi National Oil Company is a major oil & gas producer. ADNOC's refineries, pipelines, and offshore platforms use rubber seals, gaskets, couplings, and anti-vibration mounts rated for extreme conditions." },
+        { name: "Deewan", ticker: "", info: "Deewan Group is a diversified conglomerate with interests in steel, oil & gas, and construction. Their industrial operations use rubber components for heavy machinery and material handling." },
+        { name: "Ashok Leyland", ticker: "ASHOKLEY", info: "Ashok Leyland is a leading Indian commercial vehicle manufacturer. Their trucks and buses incorporate rubber bushes, mounts, shock absorbers, and seals engineered for durability." },
+        { name: "Royal Jordanian", ticker: "RJ", info: "Royal Jordanian is the flag carrier of Jordan. Their aircraft maintenance operations use rubber seals, gaskets, vibration dampers, and custom-moulded components for cabin and engine systems." }
       ]
+
     },
     contact: {
       eyebrow: "Get in touch",

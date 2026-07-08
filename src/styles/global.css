@@ -348,8 +348,54 @@ section{position:relative;z-index:1;padding:120px 0;}
   text-align:center;
   padding:10px;
   transition:color .2s;
+  position:relative;
+  cursor:default;
 }
 .client:hover{color:var(--green);}
+.client .client-ticker {
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%) scaleY(0);
+  transform-origin:bottom center;
+  width:320px;
+  max-width:90vw;
+  background:var(--panel);
+  border:1px solid var(--green);
+  border-radius:6px;
+  padding:14px 16px;
+  opacity:0;
+  pointer-events:none;
+  transition:all 0.25s ease;
+  z-index:100;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6);
+  text-align:left;
+}
+.client:hover .client-ticker {
+  opacity:1;
+  transform:translateX(-50%) scaleY(1);
+}
+.client-ticker .ticker-label {
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;
+  color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+.client-ticker .ticker-content {
+  display:block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.78rem;
+  color:var(--paper);
+  text-transform:none;
+  letter-spacing:0;
+  line-height:1.5;
+}
+[dir="rtl"] .client-ticker {
+  text-align:right;
+}
 .contact{
   background:var(--black);
   position:relative;
