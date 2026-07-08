@@ -8,6 +8,7 @@ import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import QRStrip from "../../components/QRStrip.astro";
 import WhatsApp from "../../components/WhatsApp.astro";
+import VideoModal from "../../components/VideoModal.astro";
 
 const lang = Astro.params.lang || "en";
 const dir = lang === "ar" ? "rtl" : "ltr";
@@ -41,6 +42,13 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           <div class="quote">
             {t.story.quote}
             <cite>{t.story.quoteCite}</cite>
+          </div>
+          <div class="hero-cta" style="margin-top:32px;">
+            <VideoModal
+              videoSrc={base + "/video/Industrial_transformation_video_…_202607080036.mp4"}
+              buttonLabel={isAr ? 'شاهد الفيديو' : 'Watch the Video'}
+              lang={lang}
+            />
           </div>
         </div>
         <div class="timeline reveal">

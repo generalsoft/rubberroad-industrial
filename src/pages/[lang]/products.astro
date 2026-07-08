@@ -54,7 +54,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
       <div class="prod-grid">
         {
           t.products.items.map((product) => (
-            <div class="prod-card reveal">
+            <a href={`/${lang}/products/${product.slug}/`} class="prod-card reveal">
               <div>
                 {product.iconImage ? (
                   <div class="prod-icon" style="overflow:hidden;border-radius:50%;border:2px solid var(--green);">
@@ -71,7 +71,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
                 <div class="tag">{product.tag}</div>
               </div>
               <p>{product.desc}</p>
-            </div>
+            </a>
           ))
         }
       </div>

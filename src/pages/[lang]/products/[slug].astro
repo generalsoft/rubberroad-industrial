@@ -1,0 +1,248 @@
+---
+import { translations } from "../../../i18n/translations";
+
+export async function getStaticPaths() {
+  const paths = [];
+  const langs = ["en", "ar"];
+  for (let i = 0; i < langs.length; i++) {
+    const lang = langs[i];
+    const items = translations[lang].products.items;
+    for (let j = 0; j < items.length; j++) {
+      paths.push({ params: { lang: lang, slug: items[j].slug } });
+    }
+  }
+  return paths;
+}
+
+import Layout from "../../../layouts/Layout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+import QRStrip from "../../../components/QRStrip.astro";
+import WhatsApp from "../../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+
+const product = t.products.items.find((p) => p.slug === Astro.params.slug);
+
+const idx = product ? t.products.items.indexOf(product) : -1;
+const prev = idx > 0 ? t.products.items[idx - 1] : null;
+const next = idx >= 0 && idx < t.products.items.length - 1 ? t.products.items[idx + 1] : null;
+
+const pageTitle = product ? product.name + " — Rubber Road Industrial" : "Product Not Found — Rubber Road Industrial";
+const pageDesc = product ? product.desc : "";
+const pageCanonical = product ? "https://v2.rubberroad-industrial.com/" + lang + "/products/" + product.slug + "/" : "https://v2.rubberroad-industrial.com/" + lang + "/products/";
+const pageOgImage = product ? product.iconImage : undefined;
+---
+
+<Layout title={pageTitle} lang={lang} dir={dir} description={pageDesc} canonical={pageCanonical} ogImage={pageOgImage}>
+  <div class="circuit-bg"></div>
+  <Nav lang={lang} dir={dir} />
+  <header class="hero" style="min-height:auto;padding-bottom:60px;">
+    <div class="wrap" style="padding-top:140px;">
+      <div class="section-head" style="margin-bottom:0;">
+        <div>
+          <div class="eyebrow">{t.products.eyebrow || "Products"}</div>
+          <h1 style="font-size:clamp(2.6rem,6vw,5.2rem);margin-top:18px;">
+            {product.name}
+          </h1>
+        </div>
+      </div>
+      <div class="prod-detail-grid">
+        <div class="prod-detail-gallery">
+          <div class="prod-detail-main-img">
+            <img src={base + product.iconImage} alt={product.name} />
+          </div>
+          {product.gallery && product.gallery.length > 1 && (
+            <div class="prod-detail-thumbs">
+              {product.gallery.map((img) => (
+                <div class="prod-detail-thumb">
+                  <img src={base + img} alt={product.name} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div class="prod-detail-info">
+          <div class="tag" style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px;">{product.tag}</div>
+          <p class="prod-detail-desc">{product.longDesc || product.desc}</p>
+          <div class="hero-cta" style="margin-top:32px;">
+            <a href={"/" + lang + "/contact/"} class="btn btn-solid">{isAr ? 'طلب عرض سعر' : 'Request a Quote'}</a>
+            <a href={"/" + lang + "/products/"} class="btn btn-ghost">{isAr ? 'عودة إلى المنتجات' : '← Back to Products'}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section style="padding-top:0;padding-bottom:60px;">
+    <div class="wrap">
+      <div class="prod-nav">
+        {prev ? (
+          <a href={"/" + lang + "/products/" + prev.slug + "/"} class="prod-nav-link prev">
+            <span class="prod-nav-arrow">{isAr ? '→' : '←'}</span>
+            <span>
+              <span class="prod-nav-label">{isAr ? 'المنتج السابق' : 'Previous'}</span>
+              <span class="prod-nav-name">{prev.name}</span>
+            </span>
+          </a>
+        ) : <div></div>}
+        {next ? (
+          <a href={"/" + lang + "/products/" + next.slug + "/"} class="prod-nav-link next">
+            <span>
+              <span class="prod-nav-label">{isAr ? 'المنتج التالي' : 'Next'}</span>
+              <span class="prod-nav-name">{next.name}</span>
+            </span>
+            <span class="prod-nav-arrow">{isAr ? '←' : '→'}</span>
+          </a>
+        ) : <div></div>}
+      </div>
+    </div>
+  </section>
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>
+
+<style>
+  .prod-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 48px;
+    align-items: start;
+  }
+  .prod-detail-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .prod-detail-main-img {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .prod-detail-main-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    max-height: 420px;
+  }
+  .prod-detail-thumbs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .prod-detail-thumb {
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+    background: var(--panel);
+  }
+  .prod-detail-thumb:hover {
+    border-color: var(--green);
+  }
+  .prod-detail-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .prod-detail-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .prod-detail-desc {
+    font-size: 1.05rem;
+    color: var(--paper-dim);
+    line-height: 1.8;
+  }
+  .prod-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+  }
+  .prod-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: all .25s;
+    flex: 1;
+    max-width: 380px;
+  }
+  .prod-nav-link:hover {
+    border-color: var(--green);
+    background: rgba(126,211,33,0.04);
+  }
+  .prod-nav-link.next {
+    text-align: right;
+    justify-content: flex-end;
+  }
+  [dir="rtl"] .prod-nav-link.next {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .prod-nav-arrow {
+    font-size: 1.4rem;
+    color: var(--green);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+  }
+  .prod-nav-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--paper-dim);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+  .prod-nav-name {
+    display: block;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+  @media (max-width: 980px) {
+    .prod-detail-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .prod-nav {
+      flex-direction: column;
+    }
+    .prod-nav-link {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var thumbs = document.querySelectorAll(".prod-detail-thumb");
+    var mainImg = document.querySelector(".prod-detail-main-img img");
+    if (!thumbs.length || !mainImg) return;
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("click", function () {
+        var src = this.querySelector("img").getAttribute("src");
+        mainImg.setAttribute("src", src);
+        thumbs.forEach(function (t) { t.style.borderColor = "var(--line)"; });
+        this.style.borderColor = "var(--green)";
+      });
+    });
+  });
+</script>
