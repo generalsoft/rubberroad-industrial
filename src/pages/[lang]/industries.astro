@@ -15,6 +15,11 @@ const { translations } = await import("../../i18n/translations");
 const t = translations[lang];
 const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+
+// Industry keywords for the marquee strip
+const industryKeywords = isAr
+  ? ["مطارات", "سيارات", "موانئ", "سكك حديدية", "مصانع", "نفط وغاز", "طرق", "بحرية", "إنشاءات", "لوجستيات"]
+  : ["AVIATION", "AUTOMOTIVE", "MARITIME", "RAIL", "OIL & GAS", "CONSTRUCTION", "LOGISTICS", "MANUFACTURING", "INFRASTRUCTURE", "DEFENCE"];
 ---
 
 <Layout
@@ -27,7 +32,13 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <div class="circuit-bg"></div>
   <Nav lang={lang} dir={dir} />
 
-  <section class="industries" style="padding-top:140px;">
+  <!-- Industry keyword marquee strip -->
+  <div class="marquee-strip" style="margin-top:90px;">
+    <span set:html={industryKeywords.map(kw => `${kw}  <b>•</b>  `).join('') + industryKeywords.map(kw => `${kw}  <b>•</b>  `).join('')}>
+    </span>
+  </div>
+
+  <section class="industries" style="padding-top:80px;">
     <div class="wrap">
       <div class="section-head reveal">
         <h2>{t.industries.title}</h2>
@@ -36,10 +47,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
       <div class="ind-grid reveal">
         {
           t.industries.items.map((item, index) => (
-            <div class="ind-card">
-              <span class="num">{String(index + 1).padStart(2, "0")}</span>
-              <h4>{item.name}</h4>
-              <p>{item.desc}</p>
+            <div class="ind-card" style="position:relative;overflow:hidden;">
+              <div style="position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+                <span class="num">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h4>{item.name}</h4>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
             </div>
           ))
         }
@@ -51,3 +66,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
 </Layout>
+
+<style>
+  /* Subtle scale on hover */
+  .ind-card {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .ind-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(126,211,33,0.08);
+  }
+</style>
