@@ -65,10 +65,15 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
     position: fixed;
     inset: 0;
     z-index: 2147483647;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 20px;
     isolation: isolate;
+    /* Mobile-safe: ensure it fills the viewport properly */
+    width: 100vw;
+    height: 100dvh;
+    height: -webkit-fill-available;
   }
   .video-overlay-bg {
     position: absolute;
@@ -80,11 +85,14 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
     position: relative;
     width: 100%;
     max-width: 800px;
+    max-height: 90dvh;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
   }
   .video-close-btn {
     position: absolute;
-    top: -44px;
+    top: -40px;
     right: 0;
     background: none;
     border: none;
@@ -95,21 +103,44 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
     padding: 8px 12px;
     transition: color .2s;
     z-index: 2;
+    white-space: nowrap;
   }
   .video-close-btn:hover {
     color: var(--green);
   }
   .video-modal-player {
     width: 100%;
+    height: auto;
+    max-height: 85dvh;
     border-radius: 8px;
     border: 1px solid var(--line);
     display: block;
-    max-height: 80vh;
+    object-fit: contain;
+    background: #000;
   }
   [dir="rtl"] .video-close-btn {
     right: auto;
     left: 0;
   }
+  @media (max-width: 640px) {
+    .video-overlay {
+      padding: 12px;
+    }
+    .video-close-btn {
+      top: -36px;
+      font-size: 0.78rem;
+    }
+    .video-modal-player {
+      max-height: 70dvh;
+      border-radius: 6px;
+    }
+  }
+  @supports (-webkit-touch-callout: none) {
+    .video-overlay {
+      height: -webkit-fill-available;
+    }
+  }
+
 </style>
 
 <script>
