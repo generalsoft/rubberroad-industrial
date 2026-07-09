@@ -64,10 +64,11 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
   .video-overlay {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 2147483647;
     align-items: center;
     justify-content: center;
     padding: 40px;
+    isolation: isolate;
   }
   .video-overlay-bg {
     position: absolute;
@@ -122,6 +123,10 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
       if (overlay && src) {
         const video = overlay.querySelector('video');
         if (video) {
+          // Move overlay to body to escape any parent stacking contexts
+          if (overlay.parentNode !== document.body) {
+            document.body.appendChild(overlay);
+          }
           video.src = src;
           overlay.style.display = 'flex';
           document.body.style.overflow = 'hidden';
