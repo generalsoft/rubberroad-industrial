@@ -63,17 +63,16 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
   }
   .video-overlay {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 2147483647;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     isolation: isolate;
-    /* Mobile-safe: ensure it fills the viewport properly */
-    width: 100vw;
-    height: 100dvh;
-    height: -webkit-fill-available;
   }
   .video-overlay-bg {
     position: absolute;
@@ -85,7 +84,7 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
     position: relative;
     width: 100%;
     max-width: 800px;
-    max-height: 90dvh;
+    max-height: 90vh;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -111,7 +110,7 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
   .video-modal-player {
     width: 100%;
     height: auto;
-    max-height: 85dvh;
+    max-height: 85vh;
     border-radius: 8px;
     border: 1px solid var(--line);
     display: block;
@@ -131,28 +130,54 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
       font-size: 0.78rem;
     }
     .video-modal-player {
-      max-height: 70dvh;
+      max-height: 70vh;
       border-radius: 6px;
     }
   }
-  @supports (-webkit-touch-callout: none) {
-    .video-overlay {
-      height: -webkit-fill-available;
-    }
-  }
+
 
 </style>
 
 <script>
+  function lockBodyScroll(lock) {
+    if (lock) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = '0';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.bottom = '0';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.bottom = '';
+    }
+  }
+
+  function closeOverlay(overlay) {
+    if (!overlay) return;
+    overlay.style.display = 'none';
+    lockBodyScroll(false);
+    var video = overlay.querySelector('video');
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+  }
+
   document.addEventListener('click', function(e) {
     // Find trigger button
-    const trigger = e.target.closest('.video-trigger');
+    var trigger = e.target.closest('.video-trigger');
     if (trigger) {
-      const uid = trigger.getAttribute('data-uid');
-      const src = trigger.getAttribute('data-video-src');
-      const overlay = document.querySelector('.video-overlay[data-uid="' + uid + '"]');
+      var uid = trigger.getAttribute('data-uid');
+      var src = trigger.getAttribute('data-video-src');
+      var overlay = document.querySelector('.video-overlay[data-uid="' + uid + '"]');
       if (overlay && src) {
-        const video = overlay.querySelector('video');
+        var video = overlay.querySelector('video');
         if (video) {
           // Move overlay to body to escape any parent stacking contexts
           if (overlay.parentNode !== document.body) {
@@ -160,61 +185,33 @@ const uid = "vm-" + Math.random().toString(36).slice(2, 9);
           }
           video.src = src;
           overlay.style.display = 'flex';
-          document.body.style.overflow = 'hidden';
+          lockBodyScroll(true);
           video.currentTime = 0;
-          video.play().catch(function(){});
+          video.play()['catch'](function(){});
         }
       }
       return;
     }
 
     // Find close button
-    const closeBtn = e.target.closest('.video-close-btn');
+    var closeBtn = e.target.closest('.video-close-btn');
     if (closeBtn) {
-      const overlay = closeBtn.closest('.video-overlay');
-      if (overlay) {
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-        const video = overlay.querySelector('video');
-        if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-        }
-      }
+      closeOverlay(closeBtn.closest('.video-overlay'));
       return;
     }
 
     // Click on background
-    const bg = e.target.closest('.video-overlay-bg');
+    var bg = e.target.closest('.video-overlay-bg');
     if (bg) {
-      const overlay = bg.closest('.video-overlay');
-      if (overlay) {
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-        const video = overlay.querySelector('video');
-        if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-        }
-      }
+      closeOverlay(bg.closest('.video-overlay'));
     }
   });
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      const overlay = document.querySelector('.video-overlay[style*="flex"]');
-      if (overlay) {
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-        const video = overlay.querySelector('video');
-        if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-        }
-      }
+      var overlay = document.querySelector('.video-overlay[style*="flex"]');
+      closeOverlay(overlay);
     }
   });
 </script>
+
