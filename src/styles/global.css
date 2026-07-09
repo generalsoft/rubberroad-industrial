@@ -566,21 +566,25 @@ footer{
   padding: 5px;
 }
 
-@keyframes rotateLogo {
+.logo-3d-wrap{
+  perspective:1200px;
+}
+.logo-3d{
+  width:100%;
+  height:auto;
+  animation:spin3d 8s linear infinite;
+  transition:filter 0.3s;
+}
+.logo-3d-wrap:hover .logo-3d{
+  animation:spin3d 0.8s linear infinite;
+  filter:brightness(1.15);
+}
+@keyframes spin3d {
   0% {
-    transform: rotateX(0deg) rotateY(0deg);
-  }
-  25% {
-    transform: rotateX(8deg) rotateY(12deg);
-  }
-  50% {
-    transform: rotateX(0deg) rotateY(20deg);
-  }
-  75% {
-    transform: rotateX(-8deg) rotateY(12deg);
+    transform: rotateY(0deg);
   }
   100% {
-    transform: rotateX(0deg) rotateY(0deg);
+    transform: rotateY(360deg);
   }
 }
 
