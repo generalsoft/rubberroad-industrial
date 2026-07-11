@@ -44,7 +44,15 @@ const industryKeywords = isAr
         <h2>{t.industries.title}</h2>
         <p>{t.industries.subtitle}</p>
       </div>
-      <div class="ind-grid reveal">
+      <div class="industries-img-row reveal">
+        <div class="industries-img">
+          <img src={base + `/images/${lang}/industries1.png`} alt="Industries we serve" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        </div>
+        <div class="industries-img">
+          <img src={base + `/images/${lang}/industries2.png`} alt="Industrial rubber applications" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        </div>
+      </div>
+      <div class="ind-grid reveal" style="margin-top:60px;">
         {
           t.industries.items.map((item, index) => (
             <div class="ind-card" style="position:relative;overflow:hidden;">
@@ -75,5 +83,24 @@ const industryKeywords = isAr
   .ind-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 40px rgba(126,211,33,0.08);
+  }
+  .industries-img-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .industries-img {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .industries-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .industries-img-row {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

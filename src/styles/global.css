@@ -589,6 +589,48 @@ footer{
   }
 }
 
+/* Homepage image strip */
+.home-img-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+.home-img-item {
+  overflow: hidden;
+  background: var(--black);
+}
+.home-img-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+.home-img-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+@media (max-width: 768px) {
+  .home-img-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .home-img-item img {
+    height: 150px;
+  }
+}
+@media (max-width: 480px) {
+  .home-img-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+  .home-img-item img {
+    height: 120px;
+  }
+}
+
 /* QR hover preview */
 .qr-item .qr-preview {
   position: absolute;

@@ -36,7 +36,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
             {t.material.title}
           </h2>
           <div style="margin-top:30px;border-radius:8px;overflow:hidden;border:1px solid var(--line);max-width:420px;">
-            <img src="/images/rubber/compund-2.png" alt="Rubber compound material" style="width:100%;height:auto;display:block;object-fit:cover;">
+            <img src={base + `/images/${lang}/ubiquitous.png`} alt="Rubber is everywhere" style="width:100%;height:auto;display:block;object-fit:cover;" loading="lazy">
           </div>
         </div>
         <div>
@@ -54,12 +54,24 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           ))
         }
       </div>
+      <div class="material-compounds reveal" style="margin-top:80px;">
+        <div class="section-head" style="margin-bottom:30px;">
+          <h2 style="font-size:clamp(2rem,4vw,3.2rem);">Compound Types</h2>
+          <p>Over eight distinct rubber compound types, each engineered for specific resistance properties.</p>
+        </div>
+        <div class="compounds-img">
+          <img src={base + `/images/${lang}/compounds.png`} alt="Rubber compound types" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        </div>
+      </div>
       <div style="margin-top:110px;" class="reveal">
         <div class="section-head" style="margin-bottom:30px;">
           <h2 style="font-size:clamp(2rem,4vw,3.2rem);">
             {t.material.processTitle}
           </h2>
           <p>{t.material.processSub}</p>
+        </div>
+        <div class="process-img" style="margin-bottom:40px;">
+          <img src={base + `/images/${lang}/process.png`} alt="Rubber manufacturing process" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
         </div>
         <div class="process-belt">
           {

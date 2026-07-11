@@ -45,11 +45,58 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
         />
       </div>
       <p class="hero-sub" style="max-width:600px;">{t.products.subtitle}</p>
+      <div class="products-hero-img reveal" style="margin-top:40px;">
+        <img src={base + `/images/${lang}/motion.png`} alt="Rubber in motion — product range" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+      </div>
     </div>
   </header>
 
+  <!-- PRODUCT CATEGORY IMAGES -->
+  <section style="padding-top:0;padding-bottom:0;">
+    <div class="wrap">
+      <div class="prod-cat-grid reveal">
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/general.png`} alt="General rubber compound" loading="lazy" />
+          <span>General Compound</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/tyres.png`} alt="Rubber solid tyres" loading="lazy" />
+          <span>Solid Tyres</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/fenders.png`} alt="Rubber fenders" loading="lazy" />
+          <span>Fenders</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/rollers.png`} alt="Industrial rollers" loading="lazy" />
+          <span>Rollers</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/parts.png`} alt="Rubber parts and components" loading="lazy" />
+          <span>Parts & Components</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/corners.png`} alt="Corner and wall guards" loading="lazy" />
+          <span>Corner & Wall Guards</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/humps.png`} alt="Rubber speed humps" loading="lazy" />
+          <span>Speed Humps</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/mats.png`} alt="Rubber mats" loading="lazy" />
+          <span>Mats</span>
+        </div>
+        <div class="prod-cat-item">
+          <img src={base + `/images/${lang}/tiles.png`} alt="Rubber tiles" loading="lazy" />
+          <span>Tiles</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PRODUCTS GRID -->
-  <section style="padding-top:0;">
+  <section style="padding-top:60px;">
     <div class="wrap">
       <div class="prod-grid">
         {
@@ -82,3 +129,53 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
 </Layout>
+
+<style>
+  .prod-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .prod-cat-item {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: default;
+  }
+  .prod-cat-item:hover {
+    border-color: var(--green);
+    transform: translateY(-3px);
+  }
+  .prod-cat-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .prod-cat-item span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(10,12,10,0.92));
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+  }
+  @media (max-width: 768px) {
+    .prod-cat-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .prod-cat-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

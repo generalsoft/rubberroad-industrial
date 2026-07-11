@@ -46,7 +46,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           ))
         }
       </div>
-      <div class="eyebrow reveal" style="margin-bottom:24px;">
+      <div class="trust-img-row reveal">
+        <div class="trust-img">
+          <img src={base + `/images/${lang}/certs.png`} alt="ISO Certifications" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        </div>
+        <div class="trust-img">
+          <img src={base + `/images/${lang}/clients.png`} alt="Our valued clients" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        </div>
+      </div>
+      <div class="eyebrow reveal" style="margin-bottom:24px;margin-top:60px;">
         {t.certs.clientsTitle}
       </div>
       <div class="clients-row reveal" id="clients-row">
@@ -72,3 +80,26 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
 </Layout>
+
+<style>
+  .trust-img-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .trust-img {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .trust-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .trust-img-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

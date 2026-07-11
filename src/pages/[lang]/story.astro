@@ -39,6 +39,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           <p>{t.story.p1}</p>
           <p>{t.story.p2}</p>
           <p>{t.story.p3}</p>
+          <div class="story-img-row">
+            <div class="story-img">
+              <img src={base + `/images/${lang}/story1.png`} alt="Rubber Road Industrial heritage" loading="lazy" />
+            </div>
+            <div class="story-img">
+              <img src={base + `/images/${lang}/story2.png`} alt="Rubber Road Industrial legacy" loading="lazy" />
+            </div>
+          </div>
           <div class="quote">
             {t.story.quote}
             <cite>{t.story.quoteCite}</cite>
@@ -70,3 +78,28 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
 </Layout>
+
+<style>
+  .story-img-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .story-img {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .story-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  @media (max-width: 600px) {
+    .story-img-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
