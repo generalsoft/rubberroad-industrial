@@ -191,13 +191,9 @@ nav ul a:hover{color:var(--green);}
 .marquee-strip .compound-tip:hover {
   color: var(--green);
 }
-.marquee-strip .compound-tip::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) scaleY(0);
-  transform-origin: bottom center;
+.compound-tip-popup {
+  position: fixed;
+  z-index: 10000;
   background: var(--panel);
   border: 1px solid var(--green);
   border-radius: 6px;
@@ -208,15 +204,13 @@ nav ul a:hover{color:var(--green);}
   text-transform: none;
   letter-spacing: 0;
   white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
   opacity: 0;
   pointer-events: none;
-  transition: all 0.2s ease;
-  z-index: 10000;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  transition: opacity 0.2s ease;
 }
-.marquee-strip .compound-tip:hover::after {
+.compound-tip-popup.visible {
   opacity: 1;
-  transform: translateX(-50%) scaleY(1);
 }
 @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 section{position:relative;z-index:1;padding:120px 0;}
