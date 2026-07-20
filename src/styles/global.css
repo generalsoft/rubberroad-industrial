@@ -549,6 +549,250 @@ footer{
   
   /* Nav adjustments for mobile */
   nav { padding: 15px 22px; }
+  
+  /* Hide QR strip on mobile - it takes too much space */
+  [class*="qr-item"] {
+    display: none !important;
+  }
+  div[style*="position:fixed"][style*="z-index:1000"][style*="flex-direction:column"] {
+    display: none !important;
+  }
+  
+  /* Hero meta stats - stack vertically on mobile */
+  .hero-meta {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .hero-meta b {
+    display: inline !important;
+    margin-right: 8px;
+  }
+  
+  /* Hero subtitle - full width on mobile */
+  .hero-sub {
+    max-width: 100% !important;
+  }
+  
+  /* Reduce hero top padding on mobile */
+  .hero {
+    padding: 80px 22px 60px !important;
+  }
+  
+  /* Make CTA buttons full width on small screens */
+  .hero-cta {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-cta .btn,
+  .hero-cta a {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Scroll cue - hide on mobile or reposition */
+  .scroll-cue {
+    left: 22px !important;
+    bottom: 20px !important;
+  }
+  
+  /* Section padding reduction */
+  section {
+    padding: 60px 0 !important;
+  }
+  
+  /* Section head - stack on mobile */
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .section-head p {
+    max-width: 100% !important;
+  }
+  
+  /* Story section */
+  .story-text {
+    padding: 20px !important;
+  }
+  .timeline {
+    padding: 24px 24px 24px 44px !important;
+  }
+  
+  /* Material page */
+  .material-intro > div:first-child h2 {
+    font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
+  }
+  
+  /* Process belt */
+  .process-belt {
+    grid-template-columns: 1fr !important;
+  }
+  .p-stage {
+    padding: 24px 16px 16px !important;
+  }
+  
+  /* Industry cards */
+  .ind-card {
+    padding: 24px 20px !important;
+    min-height: auto !important;
+  }
+  
+  /* Product cards */
+  .prod-card {
+    padding: 20px 18px 18px !important;
+    min-height: auto !important;
+  }
+  
+  /* Contact section */
+  .contact-grid > div:first-child {
+    padding: 20px !important;
+  }
+  .panel-box {
+    padding: 24px !important;
+  }
+  
+  /* Certificate cards */
+  .cert-card {
+    padding: 20px !important;
+  }
+  
+  /* Marquee strip */
+  .marquee-strip {
+    padding: 10px 0 !important;
+  }
+  .marquee-strip span {
+    font-size: 0.7rem !important;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 24px 22px !important;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px !important;
+  }
+  footer .wrap {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+
+/* Extra small devices (phones, < 480px) */
+@media (max-width:480px){
+  .hero h1 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
+  }
+  .hero-sub {
+    font-size: 0.9rem !important;
+  }
+  .hero-meta b {
+    font-size: 1.3rem !important;
+  }
+  .hero-meta {
+    font-size: 0.8rem !important;
+  }
+  .btn {
+    padding: 12px 20px !important;
+    font-size: 0.72rem !important;
+  }
+  .prod-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .props {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .prop {
+    padding: 18px 12px !important;
+  }
+  .prop .ic {
+    font-size: 1.4rem !important;
+  }
+  .section-head h2 {
+    font-size: clamp(1.6rem, 8vw, 2.2rem) !important;
+  }
+  .wrap {
+    padding: 0 16px !important;
+  }
+  nav {
+    padding: 12px 16px !important;
+  }
+  .logo {
+    font-size: 1.1rem !important;
+  }
+  .home-img-item img {
+    height: 100px !important;
+  }
+  .home-img-strip {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  /* Compound tip popup - make it work on touch */
+  .compound-tip-popup {
+    max-width: 85vw !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+  
+  /* Product category grid */
+  .prod-cat-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .prod-cat-item span {
+    font-size: 0.8rem !important;
+    padding: 8px 10px !important;
+  }
+  
+  /* Contact list */
+  .contact-list .row {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 4px;
+  }
+  
+  /* Client ticker on mobile */
+  .client .client-ticker {
+    width: 260px !important;
+  }
+}
+
+/* iPhone specific fixes (notch, safe areas) */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: min(0vmin, env(safe-area-inset-left));
+    padding-right: min(0vmin, env(safe-area-inset-right));
+  }
+  nav {
+    padding-top: max(15px, env(safe-area-inset-top, 15px)) !important;
+  }
+  .hero {
+    padding-top: max(80px, calc(env(safe-area-inset-top, 0px) + 60px)) !important;
+  }
+  .hero {
+    padding-bottom: max(60px, calc(env(safe-area-inset-bottom, 0px) + 40px)) !important;
+  }
+  .wrap {
+    padding-left: max(22px, env(safe-area-inset-left, 22px));
+    padding-right: max(22px, env(safe-area-inset-right, 22px));
+  }
+}
+
+/* Fix for 3D logo on mobile - show it but smaller */
+@media (max-width:980px){
+  .hero-grid > div:last-child {
+    display: none !important;
+  }
+  /* For Arabic layout where logo is first child */
+  .hero-grid > div:first-child .logo-3d-wrap {
+    display: none !important;
+  }
+}
+
+/* Touch-friendly compound tips */
+.compound-tip {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .burger { 

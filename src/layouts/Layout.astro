@@ -178,6 +178,79 @@ const twitterHandle = "@rubberroadind";
           { threshold: 0.12 },
         );
         document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+        // Touch-friendly compound tip popups
+        var tipElements = document.querySelectorAll('.marquee-strip .compound-tip');
+        var popup = document.querySelector('.compound-tip-popup');
+        if (tipElements.length && popup) {
+          var activeTip = null;
+          
+          function showTip(el) {
+            if (activeTip && activeTip !== el) {
+              hideTip();
+            }
+            var rect = el.getBoundingClientRect();
+            var tip = el.getAttribute('data-tip');
+            if (!tip) return;
+            
+            popup.textContent = tip;
+            popup.style.top = (rect.top - 10) + 'px';
+            popup.style.left = (rect.left + rect.width / 2) + 'px';
+            popup.style.transform = 'translate(-50%, -100%)';
+            popup.classList.add('visible');
+            activeTip = el;
+          }
+          
+          function hideTip() {
+            popup.classList.remove('visible');
+            activeTip = null;
+          }
+          
+          tipElements.forEach(function(el) {
+            // Touch support
+            el.addEventListener('click', function(e) {
+              e.preventDefault();
+              if (activeTip === el) {
+                hideTip();
+              } else {
+                showTip(el);
+              }
+            });
+            
+            // Mouse support
+            el.addEventListener('mouseenter', function() {
+              showTip(el);
+            });
+            el.addEventListener('mouseleave', function() {
+              setTimeout(function() {
+                if (activeTip === el) hideTip();
+              }, 200);
+            });
+          });
+          
+          // Hide on scroll
+          document.addEventListener('scroll', function() {
+            if (activeTip) hideTip();
+          });
+          
+          // Hide on tap outside
+          document.addEventListener('click', function(e) {
+            if (!e.target.closest('.compound-tip') && !e.target.closest('.compound-tip-popup')) {
+              if (activeTip) hideTip();
+            }
+          });
+        }
+
+        // Close mobile menu when tapping outside
+        document.addEventListener('click', function(e) {
+          var navEl = document.getElementById('nav');
+          var burgerBtn = document.getElementById('burger-btn');
+          if (navEl && burgerBtn && navEl.classList.contains('active')) {
+            if (!navEl.contains(e.target) && !burgerBtn.contains(e.target)) {
+              window.closeMenu();
+            }
+          }
+        });
       });
     </script>
   </body>
