@@ -35,9 +35,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           <h2 style="font-size:clamp(2rem,4vw,3.2rem);margin-top:14px;">
             {t.material.title}
           </h2>
-          <div style="margin-top:28px;border-radius:8px;overflow:hidden;border:1px solid var(--line);max-width:420px;">
-            <img src={base + `/images/${lang}/ubiquitous.png`} alt="Rubber is everywhere" style="width:100%;height:auto;display:block;object-fit:cover;" loading="lazy">
-          </div>
         </div>
         <div class="content-panel">
           <p style="color:var(--paper);line-height:1.8;font-size:1rem;margin-bottom:14px;">{t.material.p1}</p>
@@ -59,9 +56,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           <h2 style="font-size:clamp(1.8rem,4vw,3rem);">{isAr ? 'أنواع المركبات' : 'Compound Types'}</h2>
           <p>{isAr ? 'أكثر من ثمانية أنواع متميزة من مركبات المطاط، كل منها مصمم لخصائص مقاومة محددة.' : 'Over eight distinct rubber compound types, each engineered for specific resistance properties.'}</p>
         </div>
-        <div class="compounds-img" style="border-radius:8px;overflow:hidden;border:1px solid var(--line);">
-          <img src={base + `/images/${lang}/compounds.png`} alt="Rubber compound types" style="width:100%;height:auto;display:block;" loading="lazy">
-        </div>
       </div>
       <div style="margin-top:100px;" class="anim-up anim-up-d3">
         <div class="section-head" style="margin-bottom:28px;">
@@ -69,9 +63,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
             {t.material.processTitle}
           </h2>
           <p>{t.material.processSub}</p>
-        </div>
-        <div class="process-img" style="margin-bottom:40px;border-radius:8px;overflow:hidden;border:1px solid var(--line);">
-          <img src={base + `/images/${lang}/process.png`} alt="Rubber manufacturing process" style="width:100%;height:auto;display:block;" loading="lazy">
         </div>
         <div class="process-belt">
           {

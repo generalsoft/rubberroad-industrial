@@ -39,13 +39,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           <p>{t.story.p1}</p>
           <p>{t.story.p2}</p>
           <p>{t.story.p3}</p>
-          <div class="story-img-row">
-            {['story1', 'story2'].map(img => (
-              <div class="story-img">
-                <img src={base + `/images/${lang}/${img}.png`} alt="Rubber Road Industrial heritage" loading="lazy" />
-              </div>
-            ))}
-          </div>
           <div class="quote">
             {t.story.quote}
             <cite>{t.story.quoteCite}</cite>
