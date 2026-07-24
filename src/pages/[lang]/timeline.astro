@@ -1,0 +1,263 @@
+---
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "ar" } }];
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import QRStrip from "../../components/QRStrip.astro";
+import WhatsApp from "../../components/WhatsApp.astro";
+
+const lang = Astro.params.lang || "en";
+const dir = lang === "ar" ? "rtl" : "ltr";
+const { translations } = await import("../../i18n/translations");
+const t = translations[lang];
+const isAr = lang === "ar";
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+---
+
+<Layout
+  title={`${t.nav.timeline} — Rubber Road Industrial`}
+  lang={lang}
+  dir={dir}
+  description="From the first rubber factory in Amman in 1952 to ISO triple-certified operations in the UAE today — the Bahou family timeline."
+  canonical={`https://v2.rubberroad-industrial.com/${lang}/timeline/`}
+>
+  <div class="page-bg" style="background-image:url('/images/background/timeline.png');"></div>
+  <Nav lang={lang} dir={dir} />
+
+  <section class="timeline-section">
+    <div class="wrap">
+      <div class="section-head anim-up" style="margin-bottom:60px;">
+        <div class="eyebrow">{isAr ? 'الرحلة' : 'The Journey'}</div>
+        <h2 style="font-size:clamp(2rem,4.5vw,3.4rem);margin-top:14px;">
+          {isAr ? 'الجدول الزمني' : 'Timeline'}
+        </h2>
+      </div>
+
+      <!-- Timeline entries positioned over the background dots -->
+      <div class="timeline-container">
+        {
+          t.story.timeline.map((item, i) => {
+            const posMap = [
+              { top: '8%', left: '8%' },
+              { top: '23%', left: '28%' },
+              { top: '38%', left: '52%' },
+              { top: '55%', left: '78%' },
+            ];
+            const pos = posMap[i];
+            return (
+              <div
+                class={`timeline-entry anim-up anim-up-d${i + 1}`}
+                style={`top:${pos.top};left:${pos.left};`}
+              >
+                <div class="timeline-dot"></div>
+                <div class="timeline-card content-panel">
+                  <div class="timeline-year">{item.year}</div>
+                  <div class="timeline-title">{item.title}</div>
+                  <div class="timeline-desc">{item.desc}</div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <!-- Story context below timeline -->
+      <div class="story-narrative anim-up anim-up-d3" style="margin-top:80px;">
+        <div class="story-grid">
+          <div class="story-quote content-panel">
+            <blockquote>
+              <p>{t.story.subtitle}</p>
+            </blockquote>
+          </div>
+          <div class="story-text">
+            <p>{t.story.p1}</p>
+            <p>{t.story.p2}</p>
+            <p>{t.story.p3}</p>
+            <blockquote class="hussam-quote">
+              <p>{t.story.quote}</p>
+              <cite>{t.story.quoteCite}</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QRStrip lang={lang} />
+  <WhatsApp />
+  <Footer lang={lang} dir={dir} />
+</Layout>
+
+<style>
+  .timeline-section {
+    padding-top: 140px;
+    padding-bottom: 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-container {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    margin: 0 auto;
+  }
+
+  .timeline-entry {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  :root:not([dir="rtl"]) .timeline-entry {
+    flex-direction: row;
+  }
+  [dir="rtl"] .timeline-entry {
+    flex-direction: row-reverse;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-top: 14px;
+    box-shadow: 0 0 14px rgba(126, 211, 33, 0.5);
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-card {
+    margin-left: 18px;
+    margin-right: 18px;
+    padding: 22px 26px !important;
+    max-width: 280px;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s !important;
+  }
+
+  .timeline-card:hover {
+    border-color: var(--green) !important;
+    box-shadow: 0 10px 36px rgba(126, 211, 33, 0.1) !important;
+    transform: translateY(-3px);
+  }
+
+  .timeline-year {
+    font-family: 'Big Shoulders Display';
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .timeline-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--paper);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .timeline-desc {
+    font-size: 0.82rem;
+    color: var(--paper-dim);
+    line-height: 1.55;
+  }
+
+  .story-narrative {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .story-quote blockquote {
+    margin: 0;
+  }
+
+  .story-quote blockquote p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--paper);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .story-text p {
+    color: var(--paper);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+
+  .hussam-quote {
+    border-left: 3px solid var(--green);
+    padding-left: 20px;
+    margin: 28px 0 0 0;
+  }
+  [dir="rtl"] .hussam-quote {
+    border-left: none;
+    border-right: 3px solid var(--green);
+    padding-left: 0;
+    padding-right: 20px;
+  }
+
+  .hussam-quote p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--green);
+    line-height: 1.7;
+    margin-bottom: 10px !important;
+  }
+
+  .hussam-quote cite {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--paper-dim);
+  }
+
+  @media (max-width: 980px) {
+    .timeline-container {
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .timeline-entry {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+    }
+
+    .timeline-card {
+      max-width: 100%;
+    }
+
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .timeline-card {
+      padding: 18px 20px !important;
+    }
+  }
+</style>

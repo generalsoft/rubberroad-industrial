@@ -1,7 +1,8 @@
 export const translations = {
   en: {
     nav: {
-      story: "Story",
+      story: "Home",
+      timeline: "Timeline",
       material: "Material",
       industries: "Industries",
       products: "Products",
@@ -16,7 +17,7 @@ export const translations = {
       subtitle: "Rubber Road Industrial engineers high-performance rubber components for aviation, marine, rail, oil & gas, and industrial sectors across the Gulf and MENA — built on over seventy years of manufacturing heritage.",
       viewProducts: "View Products →",
       requestQuote: "Request a Quote",
-      meta1: "Origin of the Bahou family rubber legacy",
+      meta1: "Established",
       meta2: "Simultaneous ISO certifications",
       meta3: "Engineered rubber compound types"
     },
@@ -141,7 +142,8 @@ export const translations = {
   },
   ar: {
     nav: {
-      story: "القصة",
+      story: "الرئيسية",
+      timeline: "الجدول الزمني",
       material: "المواد",
       industries: "القطاعات",
       products: "المنتجات",
