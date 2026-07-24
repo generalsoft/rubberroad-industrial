@@ -15,7 +15,7 @@ const isAr = lang === "ar";
     <li><a href={`/${lang}/products/`} onclick="closeMenu()">{t.nav.products}</a></li>
     <li><a href={`/${lang}/trust/`} onclick="closeMenu()">{t.nav.trust}</a></li>
     <li><a href={`/${lang}/contact/`} class="nav-cta" onclick="closeMenu()">{t.nav.getQuote}</a></li>
-    <li><a href={`/${lang === 'en' ? 'ar' : 'en'}/`} style="font-size:0.72rem;border:1px solid var(--green);padding:6px 12px;color:var(--green)!important;">{lang === 'en' ? 'العربية' : 'English'}</a></li>
+      <li><a href={`/${lang === 'en' ? 'ar' : 'en'}/`} class="nav-lang">{lang === 'en' ? 'العربية' : 'English'}</a></li>
   </ul>
   <!-- Hamburger button -->
   <button class="burger" id="burger-btn" style="

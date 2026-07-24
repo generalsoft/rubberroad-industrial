@@ -24,27 +24,27 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   description="Rubber is in everything — it absorbs, flexes, protects, and returns. Explore over eight distinct rubber compound types and our in-house QC process at Rubber Road Industrial."
   canonical={`https://v2.rubberroad-industrial.com/${lang}/material/`}
 >
-  <div class="circuit-bg"></div>
+  <div class="page-bg" style="background-image:url('/images/background/process_stages.png');"></div>
   <Nav lang={lang} dir={dir} />
 
   <section id="material" style="padding-top:140px;">
     <div class="wrap">
-      <div class="material-intro reveal">
+      <div class="material-intro anim-up">
         <div>
           <div class="eyebrow">{t.material.eyebrow}</div>
           <h2 style="font-size:clamp(2rem,4vw,3.2rem);margin-top:14px;">
             {t.material.title}
           </h2>
-          <div style="margin-top:30px;border-radius:8px;overflow:hidden;border:1px solid var(--line);max-width:420px;">
+          <div style="margin-top:28px;border-radius:8px;overflow:hidden;border:1px solid var(--line);max-width:420px;">
             <img src={base + `/images/${lang}/ubiquitous.png`} alt="Rubber is everywhere" style="width:100%;height:auto;display:block;object-fit:cover;" loading="lazy">
           </div>
         </div>
-        <div>
-          <p>{t.material.p1}</p>
-          <p>{t.material.p2}</p>
+        <div class="content-panel">
+          <p style="color:var(--paper);line-height:1.8;font-size:1rem;margin-bottom:14px;">{t.material.p1}</p>
+          <p style="color:var(--paper);line-height:1.8;font-size:1rem;margin-bottom:0;">{t.material.p2}</p>
         </div>
       </div>
-      <div class="props reveal">
+      <div class="props anim-up anim-up-d1">
         {
           t.material.props.map((prop) => (
             <div class="prop">
@@ -54,24 +54,24 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           ))
         }
       </div>
-      <div class="material-compounds reveal" style="margin-top:80px;">
-        <div class="section-head" style="margin-bottom:30px;">
-          <h2 style="font-size:clamp(2rem,4vw,3.2rem);">Compound Types</h2>
-          <p>Over eight distinct rubber compound types, each engineered for specific resistance properties.</p>
+      <div class="material-compounds anim-up anim-up-d2" style="margin-top:80px;">
+        <div class="section-head" style="margin-bottom:28px;">
+          <h2 style="font-size:clamp(1.8rem,4vw,3rem);">{isAr ? 'أنواع المركبات' : 'Compound Types'}</h2>
+          <p>{isAr ? 'أكثر من ثمانية أنواع متميزة من مركبات المطاط، كل منها مصمم لخصائص مقاومة محددة.' : 'Over eight distinct rubber compound types, each engineered for specific resistance properties.'}</p>
         </div>
-        <div class="compounds-img">
-          <img src={base + `/images/${lang}/compounds.png`} alt="Rubber compound types" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        <div class="compounds-img" style="border-radius:8px;overflow:hidden;border:1px solid var(--line);">
+          <img src={base + `/images/${lang}/compounds.png`} alt="Rubber compound types" style="width:100%;height:auto;display:block;" loading="lazy">
         </div>
       </div>
-      <div style="margin-top:110px;" class="reveal">
-        <div class="section-head" style="margin-bottom:30px;">
-          <h2 style="font-size:clamp(2rem,4vw,3.2rem);">
+      <div style="margin-top:100px;" class="anim-up anim-up-d3">
+        <div class="section-head" style="margin-bottom:28px;">
+          <h2 style="font-size:clamp(1.8rem,4vw,3rem);">
             {t.material.processTitle}
           </h2>
           <p>{t.material.processSub}</p>
         </div>
-        <div class="process-img" style="margin-bottom:40px;">
-          <img src={base + `/images/${lang}/process.png`} alt="Rubber manufacturing process" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+        <div class="process-img" style="margin-bottom:40px;border-radius:8px;overflow:hidden;border:1px solid var(--line);">
+          <img src={base + `/images/${lang}/process.png`} alt="Rubber manufacturing process" style="width:100%;height:auto;display:block;" loading="lazy">
         </div>
         <div class="process-belt">
           {
@@ -91,3 +91,97 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
 </Layout>
+
+<style>
+  .material-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 80px;
+    align-items: start;
+  }
+  .props {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .prop {
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 28px 16px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .prop:hover { background: rgba(126,211,33,0.06); }
+  .prop .ic {
+    font-family: 'Big Shoulders Display';
+    font-weight: 900;
+    font-size: 1.7rem;
+    color: var(--green);
+  }
+  .prop .lb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--paper-dim);
+    margin-top: 6px;
+  }
+  .process-belt {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px dashed var(--line);
+    padding-top: 0;
+  }
+  .p-stage {
+    padding: 36px 18px 0;
+    border-right: 1px dashed var(--line);
+    position: relative;
+  }
+  .p-stage:last-child { border-right: none; }
+  .p-stage::before {
+    content: attr(data-n);
+    position: absolute;
+    top: -13px;
+    left: 18px;
+    width: 24px;
+    height: 24px;
+    background: var(--black);
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .p-stage h4 {
+    font-family: 'Big Shoulders Display';
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--paper);
+  }
+  .p-stage p {
+    font-size: 0.84rem;
+    color: var(--paper-dim);
+    line-height: 1.55;
+  }
+  @media (max-width: 980px) {
+    .material-intro { grid-template-columns: 1fr; gap: 40px; }
+    .props { grid-template-columns: repeat(2, 1fr); }
+    .process-belt { grid-template-columns: repeat(2, 1fr); }
+    .p-stage { border-right: none; border-bottom: 1px dashed var(--line); padding-bottom: 20px; }
+  }
+  @media (max-width: 480px) {
+    .props { grid-template-columns: 1fr 1fr; }
+    .process-belt { grid-template-columns: 1fr; }
+  }
+</style>

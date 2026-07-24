@@ -16,7 +16,6 @@ const t = translations[lang];
 const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 
-// Industry keywords for the marquee strip
 const industryKeywords = isAr
   ? ["مطارات", "سيارات", "موانئ", "سكك حديدية", "مصانع", "نفط وغاز", "طرق", "بحرية", "إنشاءات", "لوجستيات"]
   : ["AVIATION", "AUTOMOTIVE", "MARITIME", "RAIL", "OIL & GAS", "CONSTRUCTION", "LOGISTICS", "MANUFACTURING", "INFRASTRUCTURE", "DEFENCE"];
@@ -29,7 +28,7 @@ const industryKeywords = isAr
   description="From airports to oil & gas, railways to sea ports — Rubber Road Industrial supplies engineered rubber components across 9+ industries in the Gulf and MENA."
   canonical={`https://v2.rubberroad-industrial.com/${lang}/industries/`}
 >
-  <div class="circuit-bg"></div>
+  <div class="page-bg" style="background-image:url('/images/background/industries.png');"></div>
   <Nav lang={lang} dir={dir} />
 
   <!-- Industry keyword marquee strip -->
@@ -38,30 +37,20 @@ const industryKeywords = isAr
     </span>
   </div>
 
-  <section class="industries" style="padding-top:80px;">
+  <section class="industries" style="padding-top:60px;">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head anim-up">
         <h2>{t.industries.title}</h2>
         <p>{t.industries.subtitle}</p>
       </div>
-      <div class="industries-img-row reveal">
-        <div class="industries-img">
-          <img src={base + `/images/${lang}/industries1.png`} alt="Industries we serve" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-        </div>
-        <div class="industries-img">
-          <img src={base + `/images/${lang}/industries2.png`} alt="Industrial rubber applications" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-        </div>
-      </div>
-      <div class="ind-grid reveal" style="margin-top:60px;">
+      <div class="ind-grid anim-up anim-up-d1">
         {
           t.industries.items.map((item, index) => (
-            <div class="ind-card" style="position:relative;overflow:hidden;">
-              <div style="position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-between;height:100%;">
-                <span class="num">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h4>{item.name}</h4>
-                  <p>{item.desc}</p>
-                </div>
+            <div class="ind-card content-panel">
+              <span class="num">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h4>{item.name}</h4>
+                <p>{item.desc}</p>
               </div>
             </div>
           ))
@@ -76,31 +65,49 @@ const industryKeywords = isAr
 </Layout>
 
 <style>
-  /* Subtle scale on hover */
+  .ind-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
   .ind-card {
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    padding: 30px 26px !important;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: default;
+    transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s !important;
   }
   .ind-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(126,211,33,0.08);
+    transform: translateY(-6px) !important;
+    border-color: var(--green) !important;
+    box-shadow: 0 12px 40px rgba(126,211,33,0.08) !important;
   }
-  .industries-img-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  .ind-card:hover h4 { color: var(--green); }
+  .ind-card:hover p { color: var(--paper); }
+  .ind-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--paper-dim);
   }
-  .industries-img {
-    border-radius: 8px;
-    overflow: hidden;
+  .ind-card h4 {
+    font-family: 'Big Shoulders Display';
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 14px 0 8px;
+    transition: color 0.3s;
   }
-  .industries-img img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .ind-card p {
+    font-size: 0.82rem;
+    color: var(--paper-dim);
+    line-height: 1.55;
+    transition: color 0.3s;
   }
-  @media (max-width: 768px) {
-    .industries-img-row {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 980px) {
+    .ind-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 981px) and (max-width: 1100px) {
+    .ind-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>

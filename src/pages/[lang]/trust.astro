@@ -24,19 +24,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   description="Rubber Road Industrial is ISO 9001:2015, ISO 45001:2018, and ISO 14001:2015 certified. Trusted by ADNOC, Air Arabia, Dubai World, NMDC Group, and other industry leaders across the UAE and MENA."
   canonical={`https://v2.rubberroad-industrial.com/${lang}/trust/`}
 >
-  <div class="circuit-bg"></div>
+  <div class="page-bg" style="background-image:url('/images/background/trust.png');opacity:0.32;"></div>
   <Nav lang={lang} dir={dir} />
 
   <section class="certs" style="padding-top:140px;">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head anim-up">
         <h2>{t.certs.title}</h2>
         <p>{t.certs.subtitle}</p>
       </div>
-      <div class="cert-grid reveal">
+
+      <!-- ISO Certification Cards -->
+      <div class="cert-grid anim-up anim-up-d1">
         {
           t.certs.certifications.map((cert) => (
-            <div class="cert-card">
+            <div class="cert-card content-panel">
               <div class="iso">{cert.number}</div>
               <div class="ct">
                 <b>{cert.name}</b>
@@ -46,32 +48,46 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           ))
         }
       </div>
-      <div class="trust-img-row reveal">
-        <div class="trust-img">
-          <img src={base + `/images/${lang}/certs.png`} alt="ISO Certifications" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-        </div>
-        <div class="trust-img">
-          <img src={base + `/images/${lang}/clients.png`} alt="Our valued clients" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-        </div>
+
+      <!-- Certification Images -->
+      <div class="cert-img-row anim-up anim-up-d2">
+        {[
+          { src: "/images/Trust/ISO9001.png", alt: "ISO 9001" },
+          { src: "/images/Trust/ISO14001.png", alt: "ISO 14001" },
+          { src: "/images/Trust/ISO45001.png", alt: "ISO 45001" }
+        ].map(cert => (
+          <div class="cert-img-item">
+            <img src={base + cert.src} alt={cert.alt} loading="lazy" />
+          </div>
+        ))}
       </div>
-      <div class="eyebrow reveal" style="margin-bottom:24px;margin-top:60px;">
-        {t.certs.clientsTitle}
-      </div>
-      <div class="clients-row reveal" id="clients-row">
-        {t.certs.clients.map((client) => {
-          const name = typeof client === 'string' ? client : client.name;
-          const info = typeof client === 'string' ? '' : client.info;
-          const ticker = typeof client === 'string' ? '' : client.ticker;
-          return (
-            <div class="client" data-info={info} data-ticker={ticker}>
-              {name}
-              <div class="client-ticker">
-                <span class="ticker-label">{ticker ? `${ticker}` : ''}</span>
-                <span class="ticker-content">{info}</span>
+
+      <!-- Clients Section -->
+      <div class="anim-up anim-up-d3" style="margin-top:60px;">
+        <div class="eyebrow" style="margin-bottom:18px;">
+          {t.certs.clientsTitle}
+        </div>
+        <div class="client-img-row">
+          <div class="client-img-item">
+            <img src={base + "/images/Trust/Clients.png"} alt="Our valued clients" loading="lazy" />
+          </div>
+        </div>
+        <div class="clients-row" id="clients-row">
+          {t.certs.clients.map((client) => {
+            const name = typeof client === 'string' ? client : client.name;
+            const info = typeof client === 'string' ? '' : client.info;
+            const ticker = typeof client === 'string' ? '' : client.ticker;
+            return (
+              <div class="client" data-info={info} data-ticker={ticker}>
+                {name}
+                <div class="client-ticker">
+                  <span class="ticker-label">{ticker ? `${ticker}` : ''}</span>
+                  <span class="ticker-content">{info}</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   </section>
@@ -82,24 +98,174 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
 </Layout>
 
 <style>
-  .trust-img-row {
+  .cert-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .cert-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px 28px !important;
+    transition: border-color 0.35s, box-shadow 0.35s !important;
+  }
+  .cert-card:hover {
+    border-color: var(--green) !important;
+    box-shadow: 0 8px 32px rgba(126,211,33,0.08) !important;
+  }
+  .cert-card:hover .iso { color: var(--green); transform: scale(1.05); }
+  .cert-card:hover .ct { color: var(--paper); }
+  .cert-card:hover .ct b { color: var(--green); }
+  .cert-card .iso {
+    font-family: 'Big Shoulders Display';
+    font-weight: 900;
+    font-size: 2.1rem;
+    color: var(--green);
+    line-height: 1;
+    transition: transform 0.3s, color 0.3s;
+  }
+  .cert-card .ct {
+    font-size: 0.8rem;
+    color: var(--paper-dim);
+    line-height: 1.4;
+    transition: color 0.3s;
+  }
+  .cert-card .ct b {
+    color: var(--paper);
+    display: block;
+    font-size: 0.92rem;
+    margin-bottom: 2px;
+    font-family: 'Space Grotesk';
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+
+  .cert-img-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
     margin-bottom: 20px;
   }
-  .trust-img {
+  .cert-img-item {
     border-radius: 8px;
     overflow: hidden;
+    border: 1px solid var(--line);
+    background: rgba(27,29,26,0.6);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s, transform 0.3s;
   }
-  .trust-img img {
+  .cert-img-item:hover {
+    border-color: var(--green);
+    transform: translateY(-3px);
+  }
+  .cert-img-item img {
+    max-width: 100%;
+    height: auto;
+    max-height: 120px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .client-img-row {
+    margin-bottom: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .client-img-item img {
     width: 100%;
     height: auto;
     display: block;
   }
-  @media (max-width: 768px) {
-    .trust-img-row {
-      grid-template-columns: 1fr;
-    }
+
+  .clients-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .client {
+    flex: 1 1 150px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--paper-dim);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    text-align: center;
+    padding: 10px;
+    transition: color 0.25s, background 0.25s;
+    position: relative;
+    cursor: default;
+  }
+  .client:hover {
+    color: var(--green);
+    background: rgba(126,211,33,0.05);
+  }
+  .client .client-ticker {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: bottom center;
+    width: 300px;
+    max-width: 85vw;
+    background: var(--panel);
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 14px 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.28s ease;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    text-align: left;
+  }
+  .client:hover .client-ticker {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+  .client-ticker .ticker-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: 6px;
+  }
+  .client-ticker .ticker-content {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.76rem;
+    color: var(--paper);
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+  [dir="rtl"] .client-ticker { text-align: right; }
+
+  @media (max-width: 980px) {
+    .cert-grid { grid-template-columns: 1fr; }
+    .cert-img-row { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .cert-img-row { grid-template-columns: 1fr; }
+    .cert-img-item { padding: 16px; }
+    .cert-img-item img { max-height: 80px; }
   }
 </style>

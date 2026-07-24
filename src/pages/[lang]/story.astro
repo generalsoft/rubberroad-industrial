@@ -25,41 +25,45 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   description="Discover the Bahou family's rubber manufacturing legacy — from Fawzi Bahou's first factory in Amman (1952) to Rubber Road Industrial in Ras Al Khaimah, UAE. Over seventy years of engineered rubber heritage."
   canonical={`https://v2.rubberroad-industrial.com/${lang}/story/`}
 >
-  <div class="circuit-bg"></div>
+  <div class="page-bg" style="background-image:url('/images/background/timeline.png');"></div>
   <Nav lang={lang} dir={dir} />
 
-  <section class="story" style="padding-top:140px;">
+  <section style="padding-top:140px;">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head anim-up">
         <h2>{t.story.title}</h2>
-        <p>{t.story.subtitle}</p>
+        <p style="font-style:italic;">{t.story.subtitle}</p>
       </div>
       <div class="story-grid">
-        <div class="story-text reveal">
+        <div class="story-text content-panel anim-up anim-up-d1">
           <p>{t.story.p1}</p>
           <p>{t.story.p2}</p>
           <p>{t.story.p3}</p>
           <div class="story-img-row">
-            <div class="story-img">
-              <img src={base + `/images/${lang}/story1.png`} alt="Rubber Road Industrial heritage" loading="lazy" />
-            </div>
-            <div class="story-img">
-              <img src={base + `/images/${lang}/story2.png`} alt="Rubber Road Industrial legacy" loading="lazy" />
-            </div>
+            {['story1', 'story2'].map(img => (
+              <div class="story-img">
+                <img src={base + `/images/${lang}/${img}.png`} alt="Rubber Road Industrial heritage" loading="lazy" />
+              </div>
+            ))}
           </div>
           <div class="quote">
             {t.story.quote}
             <cite>{t.story.quoteCite}</cite>
           </div>
-          <div class="hero-cta" style="margin-top:32px;">
+          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
             <VideoModal
               videoSrc={base + "/video/Industrial_transformation_video_…_202607080036.mp4"}
               buttonLabel={isAr ? 'شاهد الفيديو' : 'Watch the Video'}
               lang={lang}
             />
+            <VideoModal
+              videoSrc={base + "/video/3D_cube_with_logo_rotating.mp4"}
+              buttonLabel={isAr ? 'شعار المكعب' : '3D Logo'}
+              lang={lang}
+            />
           </div>
         </div>
-        <div class="timeline reveal">
+        <div class="timeline content-panel anim-up anim-up-d2">
           {
             t.story.timeline.map((item) => (
               <div class="t-item">
@@ -80,11 +84,23 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
 </Layout>
 
 <style>
+  .story-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .story-text p {
+    color: var(--paper-dim);
+    line-height: 1.8;
+    margin-bottom: 18px;
+    font-size: 0.98rem;
+  }
   .story-img-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 24px 0;
+    gap: 10px;
+    margin: 20px 0;
   }
   .story-img {
     border: 1px solid var(--line);
@@ -97,9 +113,83 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
     display: block;
     object-fit: cover;
   }
+  .quote {
+    margin-top: 28px;
+    padding: 24px 26px;
+    border-left: 3px solid var(--green);
+    background: rgba(126,211,33,0.05);
+    font-family: 'Big Shoulders Display';
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.35;
+    border-radius: 0 6px 6px 0;
+  }
+  .quote cite {
+    display: block;
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-style: normal;
+  }
+  .timeline {
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: linear-gradient(var(--green), var(--line));
+  }
+  .t-item {
+    position: relative;
+    padding: 0 0 40px 32px;
+  }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--black);
+    border: 2px solid var(--green);
+  }
+  .t-item .yr {
+    font-family: 'Big Shoulders Display';
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--green);
+  }
+  .t-item .ttl {
+    font-size: 0.9rem;
+    color: var(--paper);
+    margin-top: 2px;
+    font-weight: 600;
+  }
+  .t-item .dsc {
+    font-size: 0.82rem;
+    color: var(--paper-dim);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  [dir="rtl"] .timeline::before { left: auto; right: 6px; }
+  [dir="rtl"] .t-item { padding: 0 32px 40px 0; }
+  [dir="rtl"] .t-item::before { left: auto; right: -1px; }
+  [dir="rtl"] .quote { border-left: none; border-right: 3px solid var(--green); border-radius: 6px 0 0 6px; }
+  @media (max-width: 980px) {
+    .story-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
   @media (max-width: 600px) {
-    .story-img-row {
-      grid-template-columns: 1fr;
-    }
+    .story-img-row { grid-template-columns: 1fr; }
   }
 </style>

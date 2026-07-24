@@ -25,16 +25,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   description="Browse Rubber Road Industrial's full product range: rubber solid tyres, fenders, mounts, seals, gaskets, speed humps, mats, tiles, and custom moulded components. ISO-certified manufacturing in Ras Al Khaimah, UAE."
   canonical={`https://v2.rubberroad-industrial.com/${lang}/products/`}
 >
-  <div class="circuit-bg"></div>
+  <div class="page-bg" style="background-image:url('/images/logo/background.png');"></div>
   <Nav lang={lang} dir={dir} />
 
   <!-- PRODUCTS HERO -->
   <header class="hero" style="min-height:auto;padding-bottom:60px;">
     <div class="wrap" style="padding-top:140px;">
-      <div class="section-head" style="margin-bottom:0;">
+      <div class="section-head anim-up" style="margin-bottom:0;">
         <div>
           <div class="eyebrow">{t.products.eyebrow || "Products"}</div>
-          <h1 style="font-size:clamp(2.6rem,6vw,5.2rem);margin-top:18px;">
+          <h1 style="font-size:clamp(2.4rem,6vw,4.8rem);margin-top:18px;">
             {t.products.title.split('\n').map((line, i) => <>{i > 0 && <br/>}{line}</>)}
           </h1>
         </div>
@@ -44,83 +44,60 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
           lang={lang}
         />
       </div>
-      <p class="hero-sub" style="max-width:600px;">{t.products.subtitle}</p>
-      <div class="products-hero-img reveal" style="margin-top:40px;">
-        <img src={base + `/images/${lang}/motion.png`} alt="Rubber in motion — product range" style="width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-      </div>
+      <p class="hero-sub anim-up anim-up-d1" style="max-width:600px;">{t.products.subtitle}</p>
     </div>
   </header>
 
-  <!-- PRODUCT CATEGORY IMAGES -->
-  <section style="padding-top:0;padding-bottom:0;">
-    <div class="wrap">
-      <div class="prod-cat-grid reveal">
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/general.png`} alt="General rubber compound" loading="lazy" />
-          <span>General Compound</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/tyres.png`} alt="Rubber solid tyres" loading="lazy" />
-          <span>Solid Tyres</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/fenders.png`} alt="Rubber fenders" loading="lazy" />
-          <span>Fenders</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/rollers.png`} alt="Industrial rollers" loading="lazy" />
-          <span>Rollers</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/parts.png`} alt="Rubber parts and components" loading="lazy" />
-          <span>Parts & Components</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/corners.png`} alt="Corner and wall guards" loading="lazy" />
-          <span>Corner & Wall Guards</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/humps.png`} alt="Rubber speed humps" loading="lazy" />
-          <span>Speed Humps</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/mats.png`} alt="Rubber mats" loading="lazy" />
-          <span>Mats</span>
-        </div>
-        <div class="prod-cat-item">
-          <img src={base + `/images/${lang}/tiles.png`} alt="Rubber tiles" loading="lazy" />
-          <span>Tiles</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS GRID -->
-  <section style="padding-top:60px;">
+  <!-- PRODUCT GRID WITH IMAGES -->
+  <section style="padding-top:0;">
     <div class="wrap">
       <div class="prod-grid">
         {
           t.products.items.map((product) => (
-            <a href={`/${lang}/products/${product.slug}/`} class="prod-card reveal">
-              <div>
-                {product.iconImage ? (
-                  <div class="prod-icon" style="overflow:hidden;border-radius:50%;border:2px solid var(--green);">
-                    <img
-                      src={base + product.iconImage}
-                      alt={product.name}
-                      style="width:100%;height:100%;object-fit:cover;"
-                    />
-                  </div>
-                ) : (
-                  <div class="prod-icon"><div class={product.iconClass}></div></div>
-                )}
-                <h4>{product.name}</h4>
-                <div class="tag">{product.tag}</div>
+            <a href={`/${lang}/products/${product.slug}/`} class="prod-card content-panel anim-up">
+              <div class="prod-img-wrap">
+                <img
+                  src={base + `/images/products/${product.slug.replace(/-/g, '_')}.png`}
+                  alt={product.name}
+                  class="prod-img"
+                  loading="lazy"
+                  onerror="this.style.display='none';this.parentElement.querySelector('.prod-fallback').style.display='flex';"
+                />
+                <div class="prod-fallback" style="display:none;">
+                  <span>{product.tag}</span>
+                </div>
               </div>
-              <p>{product.desc}</p>
+              <div class="prod-info">
+                <h4>{product.name}</h4>
+                <div class="prod-tag">{product.tag}</div>
+                <p>{product.desc}</p>
+              </div>
             </a>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D CUBE VIDEO SECTION -->
+  <section style="padding-top:60px;padding-bottom:80px;">
+    <div class="wrap">
+      <div class="content-panel anim-up" style="text-align:center;padding:48px 32px;">
+        <div class="eyebrow" style="justify-content:center;">{isAr ? 'فيديو المكعب ثلاثي الأبعاد' : '3D Cube Video'}</div>
+        <h3 style="font-size:clamp(1.4rem,3vw,2rem);margin-top:14px;margin-bottom:28px;">
+          {isAr ? 'شعارنا يتحول إلى مكعب ثلاثي الأبعاد' : 'Our Logo Transforms into a 3D Cube'}
+        </h3>
+        <div class="cube-video-wrap">
+          <video
+            src={base + "/video/3D_cube_with_logo_rotating.mp4"}
+            controls
+            preload="metadata"
+            class="cube-video"
+            playsinline
+          >
+            {isAr ? 'متصفحك لا يدعم تشغيل الفيديو.' : 'Your browser does not support the video tag.'}
+          </video>
+        </div>
       </div>
     </div>
   </section>
@@ -131,51 +108,109 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
 </Layout>
 
 <style>
-  .prod-cat-grid {
+  .prod-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
   }
-  .prod-cat-item {
+  .prod-card {
+    padding: 0 !important;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease !important;
+  }
+  .prod-card:hover {
+    transform: translateY(-6px) !important;
+    border-color: var(--green) !important;
+    box-shadow: 0 12px 40px rgba(126,211,33,0.1) !important;
+  }
+  .prod-card:hover h4 { color: var(--green); }
+  .prod-card:hover .prod-tag { color: var(--green); }
+  .prod-img-wrap {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .prod-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .prod-card:hover .prod-img {
+    transform: scale(1.06);
+  }
+  .prod-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--charcoal);
+  }
+  .prod-fallback span {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 1.3rem;
+    color: var(--green-dim);
+    text-transform: uppercase;
+  }
+  .prod-info {
+    padding: 20px 20px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .prod-info h4 {
+    font-family: 'Big Shoulders Display';
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    line-height: 1.05;
+    transition: color 0.3s;
+  }
+  .prod-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--green-dim);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-top: 6px;
+    transition: color 0.3s;
+  }
+  .prod-info p {
+    font-size: 0.8rem;
+    color: var(--paper-dim);
+    margin-top: 10px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .cube-video-wrap {
     position: relative;
-    border: 1px solid var(--line);
+    max-width: 560px;
+    margin: 0 auto;
     border-radius: 8px;
     overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s;
-    cursor: default;
+    border: 1px solid var(--line);
+    background: #000;
   }
-  .prod-cat-item:hover {
-    border-color: var(--green);
-    transform: translateY(-3px);
-  }
-  .prod-cat-item img {
+  .cube-video {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
   }
-  .prod-cat-item span {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 14px;
-    background: linear-gradient(transparent, rgba(10,12,10,0.92));
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--paper);
-  }
-  @media (max-width: 768px) {
-    .prod-cat-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  @media (max-width: 980px) {
+    .prod-grid { grid-template-columns: repeat(2, 1fr); }
+    .prod-img-wrap { height: 160px; }
   }
   @media (max-width: 480px) {
-    .prod-cat-grid {
-      grid-template-columns: 1fr;
-    }
+    .prod-grid { grid-template-columns: 1fr; }
+    .prod-img-wrap { height: 200px; }
   }
 </style>
