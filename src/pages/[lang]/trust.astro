@@ -52,11 +52,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
       <!-- Certification Images -->
       <div class="cert-img-row anim-up anim-up-d2">
         {[
-          { src: "/images/Trust/ISO9001.png", alt: "ISO 9001" },
-          { src: "/images/Trust/ISO14001.png", alt: "ISO 14001" },
-          { src: "/images/Trust/ISO45001.png", alt: "ISO 45001" }
+          { src: "/images/Trust/ISO9001.png", alt: "ISO 9001", name: "ISO9001" },
+          { src: "/images/Trust/ISO14001.png", alt: "ISO 14001", name: "ISO14001" },
+          { src: "/images/Trust/ISO45001.png", alt: "ISO 45001", name: "ISO45001" }
         ].map(cert => (
-          <div class="cert-img-item">
+          <div class="cert-img-item cert-lightbox-trigger" data-src={base + cert.src} data-name={cert.name}>
             <img src={base + cert.src} alt={cert.alt} loading="lazy" />
           </div>
         ))}
@@ -67,35 +67,126 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
         <div class="eyebrow" style="margin-bottom:18px;">
           {t.certs.clientsTitle}
         </div>
-        <div class="client-img-row">
-          <div class="client-img-item">
-            <img src={base + "/images/Trust/Clients.png"} alt="Our valued clients" loading="lazy" />
-          </div>
-        </div>
-        <div class="clients-row" id="clients-row">
-          {t.certs.clients.map((client) => {
-            const name = typeof client === 'string' ? client : client.name;
-            const info = typeof client === 'string' ? '' : client.info;
-            const ticker = typeof client === 'string' ? '' : client.ticker;
-            return (
-              <div class="client" data-info={info} data-ticker={ticker}>
-                {name}
-                <div class="client-ticker">
-                  <span class="ticker-label">{ticker ? `${ticker}` : ''}</span>
-                  <span class="ticker-content">{info}</span>
+        <div class="client-img-interactive">
+          <img
+            src={base + "/images/Trust/Clients.png"}
+            alt="Our valued clients"
+            class="client-grid-bg"
+            loading="lazy"
+          />
+          <div class="client-hit-areas">
+            {[
+              { name: "Dubai World", info: "Dubai World is a holding company managing a diversified portfolio of logistics, maritime, and port operations across the globe. Through DP World, it handles millions of rubber-tyred gantry crane operations and container movements requiring rubber fenders, seals, and industrial rollers." },
+              { name: "STEVIN ROCK", info: "Stevin Rock operates one of the largest quarries in the world in Ras Al Khaimah. Their heavy machinery fleet relies on rubber solid tyres, conveyor belts, and vibration mounts for continuous aggregate processing." },
+              { name: "NMDC GROUP", info: "NMDC Group is a leading marine and oil & gas services company in the UAE. Their fleet of vessels and offshore platforms depend on rubber fenders, seals, gaskets, and anti-vibration mounts for safe operations." },
+              { name: "Sharjah Aviation Services (SAS)", info: "SAS Sharjah Aviation provides ground handling and cargo services at Sharjah Airport. Their ground support equipment uses rubber components including landing gear buffers, seals, and industrial rollers." },
+              { name: "SKM Air Conditioning", info: "A leading HVAC manufacturer in the UAE. Their cooling systems incorporate rubber vibration isolators, gaskets, and custom-moulded seals for noise and vibration dampening." },
+              { name: "Air Arabia", info: "Air Arabia is the Middle East's first and largest low-cost carrier. Their fleet maintenance program includes rubber seals, gaskets, and vibration dampers for aircraft systems." },
+              { name: "RAK CERAMICS", info: "One of the largest ceramics manufacturers in the world, headquartered in Ras Al Khaimah. Their production lines use industrial rubber rollers, conveyor components, and custom moulded parts." },
+              { name: "KLUDI RAK", info: "A joint venture between Kludi Germany and RAK Ceramics, manufacturing premium bathroom fittings. Their production equipment relies on rubber seals, gaskets, and precision moulded components." },
+              { name: "ADNOC", info: "Abu Dhabi National Oil Company is a major oil & gas producer. ADNOC's refineries, pipelines, and offshore platforms use rubber seals, gaskets, couplings, and anti-vibration mounts rated for extreme conditions." },
+              { name: "D1 Deewan", info: "Deewan Group is a diversified conglomerate with interests in steel, oil & gas, and construction. Their industrial operations use rubber components for heavy machinery and material handling." },
+              { name: "Ashok Leyland", info: "Ashok Leyland is a leading Indian commercial vehicle manufacturer. Their trucks and buses incorporate rubber bushes, mounts, shock absorbers, and seals engineered for durability." },
+              { name: "ROYAL JORDANIAN", info: "Royal Jordanian is the flag carrier of Jordan. Their aircraft maintenance operations use rubber seals, gaskets, vibration dampers, and custom-moulded components for cabin and engine systems." }
+            ].map((client, i) => {
+              const cols = 3;
+              const w = 300, h = 215;
+              const gapX = 40, gapY = 30;
+              const offsetX = 10, offsetY = 10;
+              const row = Math.floor(i / cols);
+              const col = i % cols;
+              const left = offsetX + col * (w + gapX);
+              const top = offsetY + row * (h + gapY);
+              const imgW = 1000, imgH = 975;
+              return (
+                <div
+                  class="client-hit"
+                  style={`left:${(left/imgW)*100}%;top:${(top/imgH)*100}%;width:${(w/imgW)*100}%;height:${(h/imgH)*100}%`}
+                >
+                  <div class="client-hit-tooltip">
+                    <div class="client-hit-name">{client.name}</div>
+                    <div class="client-hit-info">{client.info}</div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ISO Lightbox Overlay -->
+  <div class="cert-lightbox" id="cert-lightbox">
+    <div class="cert-lightbox-bg"></div>
+    <div class="cert-lightbox-actions">
+      <button class="cert-lightbox-download" id="cert-lightbox-download" title="Download">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Download</span>
+      </button>
+      <button class="cert-lightbox-close" id="cert-lightbox-close" title="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <img class="cert-lightbox-img" id="cert-lightbox-img" src="" alt="" />
+  </div>
+
   <QRStrip lang={lang} />
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
 </Layout>
+
+<script>
+  (function() {
+    const lightbox = document.getElementById('cert-lightbox');
+    const lightboxImg = document.getElementById('cert-lightbox-img');
+    const closeBtn = document.getElementById('cert-lightbox-close');
+    const downloadBtn = document.getElementById('cert-lightbox-download');
+    const bg = lightbox.querySelector('.cert-lightbox-bg');
+
+    function open(src, name) {
+      lightboxImg.src = src;
+      lightboxImg.alt = name + ' certification';
+      downloadBtn.setAttribute('data-src', src);
+      downloadBtn.setAttribute('data-name', name);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.cert-lightbox-trigger').forEach(el => {
+      el.addEventListener('click', () => {
+        const src = el.getAttribute('data-src');
+        const name = el.getAttribute('data-name');
+        open(src, name);
+      });
+    });
+
+    closeBtn.addEventListener('click', close);
+    bg.addEventListener('click', close);
+
+    downloadBtn.addEventListener('click', () => {
+      const src = downloadBtn.getAttribute('data-src');
+      const name = downloadBtn.getAttribute('data-name');
+      const a = document.createElement('a');
+      a.href = src;
+      a.download = name + '.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        close();
+      }
+    });
+  })();
+</script>
 
 <style>
   .cert-grid {
@@ -171,93 +262,153 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
     display: block;
   }
 
-  .client-img-row {
-    margin-bottom: 24px;
-    border-radius: 8px;
-    overflow: hidden;
+  .client-img-interactive {
+    position: relative;
+    display: inline-block;
+    width: 100%;
     border: 1px solid var(--line);
+    border-radius: 8px;
+    line-height: 0;
   }
-  .client-img-item img {
+  .client-grid-bg {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 7px;
   }
-
-  .clients-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .client {
-    flex: 1 1 150px;
-    background: var(--panel-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    color: var(--paper-dim);
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    text-align: center;
-    padding: 10px;
-    transition: color 0.25s, background 0.25s;
-    position: relative;
-    cursor: default;
-  }
-  .client:hover {
-    color: var(--green);
-    background: rgba(126,211,33,0.05);
-  }
-  .client .client-ticker {
+  .client-hit-areas {
     position: absolute;
-    bottom: calc(100% + 8px);
+    inset: 0;
+  }
+  .client-hit {
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  .client-hit:hover {
+    background: rgba(126, 211, 33, 0.12);
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+    z-index: 10;
+  }
+  .client-hit-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%) scaleY(0);
     transform-origin: bottom center;
-    width: 300px;
-    max-width: 85vw;
-    background: var(--panel);
+    width: 340px;
+    max-width: 80vw;
+    background: #1a1d17;
     border: 1px solid var(--green);
-    border-radius: 6px;
-    padding: 14px 16px;
+    border-radius: 8px;
+    padding: 16px 18px;
     opacity: 0;
     pointer-events: none;
     transition: all 0.28s ease;
-    z-index: 100;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
     text-align: left;
   }
-  .client:hover .client-ticker {
+  .client-hit:hover .client-hit-tooltip {
     opacity: 1;
     transform: translateX(-50%) scaleY(1);
   }
-  .client-ticker .ticker-label {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
+  .client-hit-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
     color: var(--green);
     text-transform: uppercase;
-    letter-spacing: .07em;
-    margin-bottom: 6px;
+    letter-spacing: .03em;
+    margin-bottom: 8px;
   }
-  .client-ticker .ticker-content {
-    display: block;
+  .client-hit-info {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     color: var(--paper);
-    text-transform: none;
-    letter-spacing: 0;
-    line-height: 1.5;
+    line-height: 1.6;
   }
-  [dir="rtl"] .client-ticker { text-align: right; }
+  [dir="rtl"] .client-hit-tooltip { text-align: right; }
+
+  /* ISO Lightbox */
+  .cert-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .cert-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .cert-lightbox-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .cert-lightbox-actions {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    gap: 12px;
+    z-index: 2;
+  }
+  [dir="rtl"] .cert-lightbox-actions {
+    right: auto;
+    left: 24px;
+  }
+  .cert-lightbox-close,
+  .cert-lightbox-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(27, 29, 26, 0.9);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+  }
+  .cert-lightbox-close:hover,
+  .cert-lightbox-download:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: rgba(126, 211, 33, 0.08);
+  }
+  .cert-lightbox-close {
+    padding: 10px 12px;
+  }
+  .cert-lightbox-img {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cert-lightbox.active .cert-lightbox-img {
+    transform: scale(1);
+  }
+
+  .cert-img-item {
+    cursor: pointer;
+  }
 
   @media (max-width: 980px) {
     .cert-grid { grid-template-columns: 1fr; }
@@ -267,5 +418,13 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
     .cert-img-row { grid-template-columns: 1fr; }
     .cert-img-item { padding: 16px; }
     .cert-img-item img { max-height: 80px; }
+    .cert-lightbox-actions {
+      top: 16px;
+      right: 16px;
+    }
+    [dir="rtl"] .cert-lightbox-actions {
+      left: 16px;
+    }
+    .cert-lightbox-download span { display: none; }
   }
 </style>
