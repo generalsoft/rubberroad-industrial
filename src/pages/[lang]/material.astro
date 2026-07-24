@@ -78,6 +78,73 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
     </div>
   </section>
 
+  <!-- MARQUEE — Compound Types -->
+  <div class="marquee-strip">
+    <span>
+      <span class="compound-tip" data-tip="Natural Rubber">NR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Silicone Rubber">SI</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Ethylene Propylene Diene Monomer">EPDM</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Butyl Rubber (Isobutylene-Isoprene)">IIR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Nitrile Butadiene Rubber">NBR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Styrene Butadiene Rubber">SBR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Polybutadiene Rubber">PBR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Polyurethane">PU</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Fluoroelastomer (Viton®)">FKM</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Custom formulations engineered to your exact specifications">CUSTOM ENGINEERED COMPOUNDS</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Natural Rubber">NR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Silicone Rubber">SI</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Ethylene Propylene Diene Monomer">EPDM</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Butyl Rubber (Isobutylene-Isoprene)">IIR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Nitrile Butadiene Rubber">NBR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Styrene Butadiene Rubber">SBR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Polybutadiene Rubber">PBR</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Polyurethane">PU</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Fluoroelastomer (Viton®)">FKM</span> &nbsp;<b>•</b>&nbsp;
+      <span class="compound-tip" data-tip="Custom formulations engineered to your exact specifications">CUSTOM ENGINEERED COMPOUNDS</span> &nbsp;<b>•</b>&nbsp;
+    </span>
+  </div>
+
+  <script>
+    (function() {
+      var popup = document.createElement('div');
+      popup.className = 'compound-tip-popup';
+      document.body.appendChild(popup);
+      
+      var hideTimeout = null;
+      
+      function showPopup(el) {
+        var rect = el.getBoundingClientRect();
+        var tip = el.getAttribute('data-tip');
+        if (!tip) return;
+        
+        popup.textContent = tip;
+        popup.style.top = (rect.top - 10) + 'px';
+        popup.style.left = (rect.left + rect.width / 2) + 'px';
+        popup.style.transform = 'translate(-50%, -100%)';
+        popup.classList.add('visible');
+      }
+      
+      function hidePopup() {
+        popup.classList.remove('visible');
+      }
+      
+      document.querySelectorAll('.marquee-strip .compound-tip').forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+          if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+          showPopup(el);
+        });
+        el.addEventListener('mouseleave', function() {
+          hideTimeout = setTimeout(hidePopup, 100);
+        });
+      });
+      
+      popup.addEventListener('mouseenter', function() {
+        if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+      });
+      popup.addEventListener('mouseleave', function() { hidePopup(); });
+    })();
+  </script>
+
   <QRStrip lang={lang} />
   <WhatsApp />
   <Footer lang={lang} dir={dir} />
