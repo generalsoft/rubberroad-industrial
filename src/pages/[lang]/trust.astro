@@ -70,25 +70,12 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
         <div class="client-img-interactive">
           <img
             src={base + "/images/Trust/Clients.png"}
-            alt="Our valued clients"
+            alt={isAr ? "عملاؤنا المميزون" : "Our valued clients"}
             class="client-grid-bg"
             loading="lazy"
           />
           <div class="client-hit-areas">
-            {[
-              { name: "Dubai World", info: "Dubai World is a holding company managing a diversified portfolio of logistics, maritime, and port operations across the globe. Through DP World, it handles millions of rubber-tyred gantry crane operations and container movements requiring rubber fenders, seals, and industrial rollers." },
-              { name: "STEVIN ROCK", info: "Stevin Rock operates one of the largest quarries in the world in Ras Al Khaimah. Their heavy machinery fleet relies on rubber solid tyres, conveyor belts, and vibration mounts for continuous aggregate processing." },
-              { name: "NMDC GROUP", info: "NMDC Group is a leading marine and oil & gas services company in the UAE. Their fleet of vessels and offshore platforms depend on rubber fenders, seals, gaskets, and anti-vibration mounts for safe operations." },
-              { name: "Sharjah Aviation Services (SAS)", info: "SAS Sharjah Aviation provides ground handling and cargo services at Sharjah Airport. Their ground support equipment uses rubber components including landing gear buffers, seals, and industrial rollers." },
-              { name: "SKM Air Conditioning", info: "A leading HVAC manufacturer in the UAE. Their cooling systems incorporate rubber vibration isolators, gaskets, and custom-moulded seals for noise and vibration dampening." },
-              { name: "Air Arabia", info: "Air Arabia is the Middle East's first and largest low-cost carrier. Their fleet maintenance program includes rubber seals, gaskets, and vibration dampers for aircraft systems." },
-              { name: "RAK CERAMICS", info: "One of the largest ceramics manufacturers in the world, headquartered in Ras Al Khaimah. Their production lines use industrial rubber rollers, conveyor components, and custom moulded parts." },
-              { name: "KLUDI RAK", info: "A joint venture between Kludi Germany and RAK Ceramics, manufacturing premium bathroom fittings. Their production equipment relies on rubber seals, gaskets, and precision moulded components." },
-              { name: "ADNOC", info: "Abu Dhabi National Oil Company is a major oil & gas producer. ADNOC's refineries, pipelines, and offshore platforms use rubber seals, gaskets, couplings, and anti-vibration mounts rated for extreme conditions." },
-              { name: "D1 Deewan", info: "Deewan Group is a diversified conglomerate with interests in steel, oil & gas, and construction. Their industrial operations use rubber components for heavy machinery and material handling." },
-              { name: "Ashok Leyland", info: "Ashok Leyland is a leading Indian commercial vehicle manufacturer. Their trucks and buses incorporate rubber bushes, mounts, shock absorbers, and seals engineered for durability." },
-              { name: "ROYAL JORDANIAN", info: "Royal Jordanian is the flag carrier of Jordan. Their aircraft maintenance operations use rubber seals, gaskets, vibration dampers, and custom-moulded components for cabin and engine systems." }
-            ].map((client, i) => {
+            {t.certs.clients.map((client, i) => {
               const cols = 3;
               const w = 300, h = 215;
               const gapX = 40, gapY = 30;
@@ -120,11 +107,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
   <div class="cert-lightbox" id="cert-lightbox">
     <div class="cert-lightbox-bg"></div>
     <div class="cert-lightbox-actions">
-      <button class="cert-lightbox-download" id="cert-lightbox-download" title="Download">
+      <button class="cert-lightbox-download" id="cert-lightbox-download" title={isAr ? "تنزيل" : "Download"}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Download</span>
+        <span>{isAr ? "تنزيل" : "Download"}</span>
       </button>
-      <button class="cert-lightbox-close" id="cert-lightbox-close" title="Close">
+      <button class="cert-lightbox-close" id="cert-lightbox-close" title={isAr ? "إغلاق" : "Close"}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
@@ -138,6 +125,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
 
 <script>
   (function() {
+    const isAr = document.documentElement.lang === 'ar';
     const lightbox = document.getElementById('cert-lightbox');
     const lightboxImg = document.getElementById('cert-lightbox-img');
     const closeBtn = document.getElementById('cert-lightbox-close');
@@ -146,7 +134,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.s
 
     function open(src, name) {
       lightboxImg.src = src;
-      lightboxImg.alt = name + ' certification';
+      lightboxImg.alt = isAr ? name + ' — شهادة' : name + ' certification';
       downloadBtn.setAttribute('data-src', src);
       downloadBtn.setAttribute('data-name', name);
       lightbox.classList.add('active');

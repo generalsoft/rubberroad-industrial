@@ -16,9 +16,10 @@ const t = translations[lang];
 const isAr = lang === "ar";
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 
+// Marquee keywords mirror the 9 sectors listed on the brochure's "Industries We Serve" spread (pp. 8-9).
 const industryKeywords = isAr
-  ? ["مطارات", "سيارات", "موانئ", "سكك حديدية", "مصانع", "نفط وغاز", "طرق", "بحرية", "إنشاءات", "لوجستيات"]
-  : ["AVIATION", "AUTOMOTIVE", "MARITIME", "RAIL", "OIL & GAS", "CONSTRUCTION", "LOGISTICS", "MANUFACTURING", "INFRASTRUCTURE", "DEFENCE"];
+  ? ["المطارات", "صناعة السيارات", "الموانئ البحرية", "مصانع المطاط والإطارات", "السكك الحديدية", "المصانع بشكل عام", "النفط والغاز", "مواقف السيارات وقطاعات أخرى", "الطرق"]
+  : ["AIRPORTS", "AUTOMOBILE INDUSTRY", "SEA PORTS", "RUBBER & TYRE FACTORIES", "RAILWAYS", "FACTORIES IN GENERAL", "OIL & GAS", "PARKINGS & OTHER SECTORS", "ROADS"];
 ---
 
 <Layout

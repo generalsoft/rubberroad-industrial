@@ -63,14 +63,14 @@ export const translations = {
       subtitle: "From the runway to the seabed — engineered rubber wherever pressure, vibration, or impact threaten performance.",
       items: [
         { name: "Airports", desc: "Rubber landing gear buffers, vibration dampers, and ground equipment components keep aviation infrastructure performing under extreme load." },
-        { name: "Automobile Industry", desc: "Bushes, mounts, shock absorbers, and seals that keep vehicles operating safely — from passenger cars to heavy machinery." },
+        { name: "Automobile Industry", desc: "Bushes, mounts, shock absorbers, and seals that keep vehicles operating safely from passenger cars to heavy machinery." },
         { name: "Sea Ports", desc: "Rubber fenders protect vessels and berths daily. Without them, every docking is a potential collision." },
         { name: "Rubber & Tyre Factories", desc: "Compound supply and technical expertise for manufacturers who demand precision in every batch." },
-        { name: "Railways", desc: "Vibration mounts and dampers absorb vibration, reduce noise, and accommodate thermal expansion for rail and metro applications." },
+        { name: "Railways", desc: "Our vibration mounts and dampers, crafted for durability, are designed for rail and metro applications. They absorb vibration, reduce noise, and accommodate thermal expansion—helping maintain track stability and minimize structural fatigue in demanding conditions." },
         { name: "Factories in General", desc: "Industrial rollers, conveyor components, and custom moulded parts for production environments that cannot afford downtime." },
-        { name: "Oil & Gas", desc: "Seals, gaskets, and couplings engineered for extreme chemical exposure, pressure, and temperature." },
+        { name: "Oil & Gas", desc: "Seals, gaskets, and couplings engineered to withstand extreme chemical exposure, pressure, and temperature where a failed seal is a crisis, not an inconvenience." },
         { name: "Parkings & Other Sectors", desc: "Wheel stoppers, bollards, and protective rubber elements for car parks, warehouses, and urban infrastructure." },
-        { name: "Roads", desc: "Speed humps, corner guards, and road barriers that protect people and infrastructure in high-traffic environments." }
+        { name: "Roads", desc: "Speed humps, corner guards, and road barriers that protect people and infrastructure in the highest-traffic environments." }
       ]
     },
     products: {
@@ -102,18 +102,18 @@ export const translations = {
       ],
       clientsTitle: "Some of our valuable clients",
       clients: [
-        { name: "Dubai World", ticker: "", info: "Dubai World is a holding company managing a diversified portfolio of logistics, maritime, and port operations across the globe. Through DP World, it handles millions of rubber-tyred gantry crane operations and container movements requiring rubber fenders, seals, and industrial rollers." },
-        { name: "SR Stevin Rock", ticker: "", info: "Stevin Rock operates one of the largest quarries in the world in Ras Al Khaimah. Their heavy machinery fleet relies on rubber solid tyres, conveyor belts, and vibration mounts for continuous aggregate processing." },
-        { name: "NMDC Group", ticker: "", info: "NMDC Group is a leading marine and oil & gas services company in the UAE. Their fleet of vessels and offshore platforms depend on rubber fenders, seals, gaskets, and anti-vibration mounts for safe operations." },
-        { name: "SAS Sharjah Aviation", ticker: "", info: "SAS Sharjah Aviation provides ground handling and cargo services at Sharjah Airport. Their ground support equipment uses rubber components including landing gear buffers, seals, and industrial rollers." },
-        { name: "Air Conditioning Equipment Co.", ticker: "", info: "A leading HVAC manufacturer in the UAE. Their cooling systems incorporate rubber vibration isolators, gaskets, and custom-moulded seals for noise and vibration dampening." },
-        { name: "Air Arabia", ticker: "AIRARABIA", info: "Air Arabia is the Middle East's first and largest low-cost carrier. Their fleet maintenance program includes rubber seals, gaskets, and vibration dampers for aircraft systems." },
-        { name: "RAK Ceramics", ticker: "", info: "One of the largest ceramics manufacturers in the world, headquartered in Ras Al Khaimah. Their production lines use industrial rubber rollers, conveyor components, and custom moulded parts." },
-        { name: "Kludi RAK", ticker: "", info: "A joint venture between Kludi Germany and RAK Ceramics, manufacturing premium bathroom fittings. Their production equipment relies on rubber seals, gaskets, and precision moulded components." },
-        { name: "ADNOC", ticker: "ADNOC", info: "Abu Dhabi National Oil Company is a major oil & gas producer. ADNOC's refineries, pipelines, and offshore platforms use rubber seals, gaskets, couplings, and anti-vibration mounts rated for extreme conditions." },
-        { name: "Deewan", ticker: "", info: "Deewan Group is a diversified conglomerate with interests in steel, oil & gas, and construction. Their industrial operations use rubber components for heavy machinery and material handling." },
-        { name: "Ashok Leyland", ticker: "ASHOKLEY", info: "Ashok Leyland is a leading Indian commercial vehicle manufacturer. Their trucks and buses incorporate rubber bushes, mounts, shock absorbers, and seals engineered for durability." },
-        { name: "Royal Jordanian", ticker: "RJ", info: "Royal Jordanian is the flag carrier of Jordan. Their aircraft maintenance operations use rubber seals, gaskets, vibration dampers, and custom-moulded components for cabin and engine systems." }
+        { name: "Dubai World", info: "Dubai World is a holding company managing a diversified portfolio of logistics, maritime, and port operations across the globe. Through DP World, it handles millions of rubber-tyred gantry crane operations and container movements requiring rubber fenders, seals, and industrial rollers." },
+        { name: "SR Stevin Rock", info: "Stevin Rock operates one of the largest quarries in the world in Ras Al Khaimah. Their heavy machinery fleet relies on rubber solid tyres, conveyor belts, and vibration mounts for continuous aggregate processing." },
+        { name: "NMDC Group", info: "NMDC Group is a leading marine and oil & gas services company in the UAE. Their fleet of vessels and offshore platforms depend on rubber fenders, seals, gaskets, and anti-vibration mounts for safe operations." },
+        { name: "Sharjah Aviation Services (SAS)", info: "SAS Sharjah Aviation provides ground handling and cargo services at Sharjah Airport. Their ground support equipment uses rubber components including landing gear buffers, seals, and industrial rollers." },
+        { name: "SKM Air Conditioning", info: "A leading HVAC manufacturer in the UAE. Their cooling systems incorporate rubber vibration isolators, gaskets, and custom-moulded seals for noise and vibration dampening." },
+        { name: "Air Arabia", info: "Air Arabia is the Middle East's first and largest low-cost carrier. Their fleet maintenance program includes rubber seals, gaskets, and vibration dampers for aircraft systems." },
+        { name: "RAK Ceramics", info: "One of the largest ceramics manufacturers in the world, headquartered in Ras Al Khaimah. Their production lines use industrial rubber rollers, conveyor components, and custom moulded parts." },
+        { name: "Kludi RAK", info: "A joint venture between Kludi Germany and RAK Ceramics, manufacturing premium bathroom fittings. Their production equipment relies on rubber seals, gaskets, and precision moulded components." },
+        { name: "ADNOC", info: "Abu Dhabi National Oil Company is a major oil & gas producer. ADNOC's refineries, pipelines, and offshore platforms use rubber seals, gaskets, couplings, and anti-vibration mounts rated for extreme conditions." },
+        { name: "D1 Deewan", info: "Deewan Group is a diversified conglomerate with interests in steel, oil & gas, and construction. Their industrial operations use rubber components for heavy machinery and material handling." },
+        { name: "Ashok Leyland", info: "Ashok Leyland is a leading Indian commercial vehicle manufacturer. Their trucks and buses incorporate rubber bushes, mounts, shock absorbers, and seals engineered for durability." },
+        { name: "Royal Jordanian", info: "Royal Jordanian is the flag carrier of Jordan. Their aircraft maintenance operations use rubber seals, gaskets, vibration dampers, and custom-moulded components for cabin and engine systems." }
       ]
 
     },
@@ -203,15 +203,15 @@ export const translations = {
       title: "القطاعات\nالتي نخدمها",
       subtitle: "من المدرج إلى قاع البحر - مطاط هندسي حيثما يهدد الضغط أو الاهتزاز أو الصدمة الأداء.",
       items: [
-        { name: "المطارات", desc: "وسائد معدات الهبوط المطاطية، ومخمدات الاهتزاز، ومكونات معدات الأرضي تحافظ على أداء البنية التحتية للطيران تحت الأحمال القصوى." },
-        { name: "صناعة السيارات", desc: "البطانات والحوامل وممتصات الصدمات والأختام التي تحافظ على تشغيل المركبات بأمان - من سيارات الركاب إلى الآلات الثقيلة." },
-        { name: "الموانئ البحرية", desc: "الواقيات المطاطية تحمي السفن والأرصفة يومياً. بدونها، كل رسو هو اصطدام محتمل." },
-        { name: "مصانع المطاط والإطارات", desc: "توريد المركبات والخبرة الفنية للمصنعين الذين يطلبون الدقة في كل دفعة." },
-        { name: "السكك الحديدية", desc: "حوامل ومخمدات الاهتزاز تمتص الاهتزاز وتقلل الضوضاء وتستوعب التمدد الحراري لتطبيقات السكك الحديدية والمترو." },
-        { name: "المصانع العامة", desc: "بكرات صناعية ومكونات ناقلة وأجزاء مقولبة مخصصة لبيئات الإنتاج التي لا تستطيع تحمل التوقف." },
-        { name: "النفط والغاز", desc: "أختام وجوانات ووصلات مصممة للتعرض الكيميائي الشديد والضغط ودرجة الحرارة." },
-        { name: "مواقف السيارات والقطاعات الأخرى", desc: "مصدات عجلات وحواجز وعناصر مطاطية واقية لمواقف السيارات والمستودعات والبنية التحتية الحضرية." },
-        { name: "الطرق", desc: "مطبات السرعة وواقيات الزوايا وحواجز الطرق التي تحمي الناس والبنية التحتية في البيئات عالية الحركة." }
+        { name: "المطارات", desc: "تعمل وسادات معدات الهبوط المطاطية، ومخمّدات الاهتزاز، ومكوّنات المعدات الأرضية على الحفاظ على أداء البنية التحتية للطيران تحت الأحمال الشديدة." },
+        { name: "صناعة السيارات", desc: "الجلب المطاطية، وقواعد التثبيت، وممتصّات الصدمات، ومانعات التسرب التي تحافظ على تشغيل المركبات بأمان، من سيارات الركاب إلى المعدات الثقيلة." },
+        { name: "الموانئ البحرية", desc: "تحمي المصدّات المطاطية السفن والأرصفة يوميًا، وبدونها يصبح كل رسوّ احتمالًا للتصادم." },
+        { name: "مصانع المطاط والإطارات", desc: "توريد الخلطات والخبرة التقنية للمصنّعين الذين يطلبون دقة في كل دفعة." },
+        { name: "السكك الحديدية", desc: "تم تصميم قواعد التثبيت ومخمّدات الاهتزاز لدينا، المصنّعة لتحمّل الظروف القاسية، لتطبيقات السكك الحديدية والمترو. حيث تعمل على امتصاص الاهتزاز وتقليل الضوضاء، مع التكيّف مع التمدد الحراري، مما يساعد على الحفاظ على استقرار المسار وتقليل الإجهاد الهيكلي في الظروف الصعبة." },
+        { name: "المصانع بشكل عام", desc: "رولات صناعية، ومكوّنات السيور الناقلة، وأجزاء مُشكَّلة حسب الطلب لبيئات الإنتاج التي لا تحتمل التوقف." },
+        { name: "النفط والغاز", desc: "تُصمَّم مانعات التسرب والحشوات ووصلات الاقتران لتحمّل التعرض الكيميائي الشديد والضغط ودرجات الحرارة العالية، حيث إن فشل الإحكام يُعدّ أزمة وليس مجرد إزعاج." },
+        { name: "مواقف السيارات وقطاعات أخرى", desc: "مثبتات العجلات، والأعمدة الواقية، وعناصر الحماية المطاطية لمواقف السيارات والمستودعات والبنية التحتية الحضرية." },
+        { name: "الطرق", desc: "مطبات السرعة، وحمايات الزوايا، والحواجز المرورية التي تحمي الأشخاص والبنية التحتية في البيئات ذات الكثافة المرورية العالية." }
       ]
     },
     products: {
@@ -243,9 +243,18 @@ export const translations = {
       ],
       clientsTitle: "بعض من عملائنا المميزين",
       clients: [
-        "دبي ورلد", "إس آر ستيفين روك", "مجموعة NMDC", "ساس الشارقة للطيران",
-        "شركة معدات تكييف الهواء", "العربية للطيران", "سيراميك رأس الخيمة", "كلودي رأس الخيمة",
-        "أدنوك", "ديوان", "أشوك ليلاند", "الملكية الأردنية"
+        { name: "دبي ورلد", info: "دبي ورلد شركة قابضة تدير محفظة متنوعة من عمليات الخدمات اللوجستية والبحرية والموانئ حول العالم. ومن خلال موانئ دبي العالمية، تشغّل ملايين عمليات الرافعات الجسرية ذات الإطارات المطاطية وحركة الحاويات التي تتطلب مصدّات مطاطية ومانعات تسرب ورولات صناعية." },
+        { name: "إس آر ستيفين روك", info: "تشغّل ستيفين روك أحد أكبر المحاجر في العالم في رأس الخيمة. ويعتمد أسطول معداتها الثقيلة على الإطارات المطاطية الصلبة والسيور الناقلة وقواعد التثبيت لضمان استمرارية معالجة الركام." },
+        { name: "مجموعة NMDC", info: "مجموعة NMDC شركة رائدة في الخدمات البحرية وخدمات النفط والغاز في دولة الإمارات. ويعتمد أسطول سفنها ومنصاتها البحرية على المصدّات المطاطية ومانعات التسرب والحشوات وقواعد مقاومة الاهتزاز لتشغيل آمن." },
+        { name: "الشارقة لخدمات الطيران (SAS)", info: "تقدّم ساس الشارقة للطيران خدمات المناولة الأرضية والشحن في مطار الشارقة. وتستخدم معدات الدعم الأرضي لديها مكوّنات مطاطية تشمل وسادات معدات الهبوط ومانعات التسرب والرولات الصناعية." },
+        { name: "شركة تكييف الهواء (SKM)", info: "شركة رائدة في تصنيع أنظمة التكييف والتهوية في دولة الإمارات. وتتضمن أنظمة التبريد لديها عوازل اهتزاز مطاطية وحشوات ومانعات تسرب مشكّلة حسب الطلب لخفض الضوضاء والاهتزاز." },
+        { name: "العربية للطيران", info: "العربية للطيران هي أول وأكبر شركة طيران اقتصادي في الشرق الأوسط. ويشمل برنامج صيانة أسطولها مانعات تسرب مطاطية وحشوات ومخمّدات اهتزاز لأنظمة الطائرات." },
+        { name: "سيراميك رأس الخيمة", info: "واحدة من أكبر شركات تصنيع السيراميك في العالم، ويقع مقرها الرئيسي في رأس الخيمة. وتستخدم خطوط إنتاجها رولات مطاطية صناعية ومكوّنات السيور الناقلة وأجزاء مشكّلة حسب الطلب." },
+        { name: "كلودي رأس الخيمة", info: "مشروع مشترك بين كلودي الألمانية وسيراميك رأس الخيمة لتصنيع تجهيزات الحمامات الفاخرة. وتعتمد معدات إنتاجها على مانعات تسرب مطاطية وحشوات ومكوّنات مشكّلة بدقة." },
+        { name: "أدنوك", info: "شركة بترول أبوظبي الوطنية (أدنوك) من أكبر منتجي النفط والغاز. وتستخدم مصافي أدنوك وخطوط أنابيبها ومنصاتها البحرية مانعات تسرب مطاطية وحشوات ووصلات اقتران وقواعد مقاومة للاهتزاز مصمّمة للظروف القصوى." },
+        { name: "ديوان", info: "مجموعة ديوان تكتّل متنوّع الأنشطة تشمل الحديد والنفط والغاز والإنشاءات. وتستخدم عملياتها الصناعية مكوّنات مطاطية للمعدات الثقيلة ومناولة المواد." },
+        { name: "أشوك ليلاند", info: "أشوك ليلاند شركة رائدة في تصنيع المركبات التجارية في الهند. وتتضمن شاحناتها وحافلاتها جلباً مطاطية وقواعد تثبيت وممتصّات صدمات ومانعات تسرب مصمّمة لتحمّل الاستخدام الطويل." },
+        { name: "الملكية الأردنية", info: "الملكية الأردنية هي الناقل الوطني للمملكة الأردنية الهاشمية. وتستخدم عمليات صيانة طائراتها مانعات تسرب مطاطية وحشوات ومخمّدات اهتزاز ومكوّنات مشكّلة حسب الطلب لأنظمة المقصورة والمحركات." }
       ]
     },
     contact: {
